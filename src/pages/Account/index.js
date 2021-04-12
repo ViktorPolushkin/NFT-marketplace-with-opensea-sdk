@@ -1,11 +1,13 @@
 import React from 'react'
 
+import AccountContainer from 'containers/Account'
+
 import useStyles from './style'
 
 const Account = () => {
   const classes = useStyles()
 
-  return <div>Account Page in Components</div>
+  return <AccountContainer />
 }
 
 export default Account

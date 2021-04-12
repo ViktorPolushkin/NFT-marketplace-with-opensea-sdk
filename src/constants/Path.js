@@ -1,6 +1,8 @@
 const PATHS = {
-  LANDING: '/',
-  PROFILE: '/account',
+  DASHBOARD: '/',
+  ACCOUNT: '/account',
+  TRADINGS: '/tradings',
+  CREATORS: '/creators'
 }
 
 export default PATHS
