@@ -4,6 +4,7 @@ const useStyles = makeStyles(theme => ({
   link: {
     color: 'black',
     fontWeight: 600,
+    textDecoration: 'none',
 
     '&:hover': {
       fontWeight: 700,

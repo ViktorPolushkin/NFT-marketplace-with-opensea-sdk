@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   button: {
+    minWidth: 160,
     fontSize: 16,
     lineHeight: 2,
     fontFamily: 'Be Vietnam, sans-serif',

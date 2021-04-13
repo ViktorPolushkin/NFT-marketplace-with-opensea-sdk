@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import CustomButton from 'components/CustomButton'
 import CustomLink from 'components/CustomLink'
+import CustomButtonGroup from 'components/CustomButtonGroup'
 import WalletConnectButton from 'components/WalletConnectButton'
 
 import useStyles from './style'
@@ -43,6 +44,8 @@ const Header = ({ location, ...otherProps }) => {
           <Typography className={classes.title} variant={'h6'} noWrap>
             Tokma Marketplace
           </Typography>
+          <div className={classes.grow} />
+          <CustomButtonGroup items={['Dashboard', 'Tradings', 'Creators']} />
           <div className={classes.grow} />
           <CustomButton variant='contained' edge='end' onClick={handleOpen}>
             Connect Wallet

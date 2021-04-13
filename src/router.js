@@ -13,16 +13,22 @@ import PATHS from 'constants/Path'
 
 const Routers = () => {
   return (
-    <Router>
-      <Route component={Header} />
-      <Switch>
-        <Route path={PATHS.DASHBOARD} components={Dashboard} />
-        <Route path={PATHS.ACCOUNT} components={Account} />
-        <Route path={PATHS.TRADINGS} components={Tradings} />
-        <Route path={PATHS.CREATORS} components={Creators} />
-      </Switch>
-      <Route component={Footer} />
-    </Router>
+    <>
+      <Router>
+        <Switch>
+          <Route component={Header} />
+        </Switch>
+        <Switch>
+          <Route path={PATHS.DASHBOARD} components={Dashboard} />
+          <Route path={PATHS.ACCOUNT} components={Account} />
+          <Route path={PATHS.TRADINGS} components={Tradings} />
+          <Route path={PATHS.CREATORS} components={Creators} />
+        </Switch>
+        <Switch>
+          <Route component={Footer} />
+        </Switch>
+      </Router>
+    </>
   )
 }
 
