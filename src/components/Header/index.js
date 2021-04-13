@@ -45,7 +45,10 @@ const Header = ({ location, ...otherProps }) => {
             Tokma Marketplace
           </Typography>
           <div className={classes.grow} />
-          <CustomButtonGroup items={['Dashboard', 'Tradings', 'Creators']} />
+          <CustomButtonGroup
+            items={['Dashboard', 'Tradings', 'Creators']}
+            location={location}
+          />
           <div className={classes.grow} />
           <CustomButton variant='contained' edge='end' onClick={handleOpen}>
             Connect Wallet

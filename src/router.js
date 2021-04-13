@@ -15,18 +15,14 @@ const Routers = () => {
   return (
     <>
       <Router>
-        <Switch>
-          <Route component={Header} />
-        </Switch>
+        <Header />
         <Switch>
           <Route path={PATHS.DASHBOARD} components={Dashboard} />
-          <Route path={PATHS.ACCOUNT} components={Account} />
           <Route path={PATHS.TRADINGS} components={Tradings} />
           <Route path={PATHS.CREATORS} components={Creators} />
+          <Route path={`${PATHS.ACCOUNT}/:accountId`} components={Account} />
         </Switch>
-        <Switch>
-          <Route component={Footer} />
-        </Switch>
+        <Footer />
       </Router>
     </>
   )

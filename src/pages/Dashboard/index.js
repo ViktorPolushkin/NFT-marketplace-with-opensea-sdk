@@ -4,7 +4,7 @@ import DashboardContainer from 'containers/Dashboard'
 
 import useStyles from './style'
 
-const Dashboard = () => {
+const Dashboard = props => {
   const classes = useStyles()
 
   return <DashboardContainer />
