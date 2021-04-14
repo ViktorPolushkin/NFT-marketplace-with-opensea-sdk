@@ -1,11 +1,9 @@
 import React from 'react'
 
-import useStyles from './style'
+import { DashboardWrapper } from './style'
 
 const Dashboard = () => {
-  const classes = useStyles()
-
-  return <div>Dashboard Page in Components</div>
+  return <DashboardWrapper>Dashboard</DashboardWrapper>
 }
 
 export default Dashboard

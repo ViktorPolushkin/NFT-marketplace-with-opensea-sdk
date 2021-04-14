@@ -1,28 +1,30 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 
 import Dashboard from 'pages/Dashboard'
-import Account from 'pages/Account'
-import Tradings from 'pages/Tradings'
+import Browse from 'pages/Browse'
 import Creators from 'pages/Creators'
+import Collections from 'pages/Collections'
+import Account from 'pages/Account'
 
 import PATHS from 'constants/Path'
 
 const Routers = () => {
   return (
-    <Router>
-      <Route component={Header} />
+    <BrowserRouter>
+      <Header />
       <Switch>
-        <Route path={PATHS.DASHBOARD} components={Dashboard} />
-        <Route path={PATHS.ACCOUNT} components={Account} />
-        <Route path={PATHS.TRADINGS} components={Tradings} />
-        <Route path={PATHS.CREATORS} components={Creators} />
+        <Route exact path={PATHS.DASHBOARD} component={Dashboard} />
+        <Route path={PATHS.BROWSE_ASSETS} component={Browse} />
+        <Route path={PATHS.CREATORS} component={Creators} />
+        <Route path={PATHS.COLLECTIONS} component={Collections} />
+        <Route path={PATHS.ACCOUNT} component={Account} />
       </Switch>
-      <Route component={Footer} />
-    </Router>
+      <Footer />
+    </BrowserRouter>
   )
 }
 

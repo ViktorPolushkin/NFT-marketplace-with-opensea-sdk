@@ -1,90 +1,95 @@
 import React, { useState } from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import ToolBar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
+import { useHistory } from 'react-router-dom'
 
-import MenuIcon from '@material-ui/icons/Menu'
+import Logo from 'components/Logo'
+import SearchLine from 'components/SearchLine'
+import Navbar from 'components/Navbar'
+import Avatar from 'components/Avatar'
+import Loading from 'components/Loading'
 
-import CustomButton from 'components/CustomButton'
-import CustomLink from 'components/CustomLink'
-import WalletConnectButton from 'components/WalletConnectButton'
+import PATHS from 'constants/Path'
 
-import useStyles from './style'
+import AVATAR from 'resources/avatar.png'
 
-const Header = ({ location, ...otherProps }) => {
-  const classes = useStyles()
+import { HeaderWrapper } from './style'
 
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
+const Header = ({ isLoading, isLoggedIn, ...otherProps }) => {
+  const [walletId, setWalletId] = useState('')
+
+  const history = useHistory()
+  const { ethereum } = window
+
+  const isMetaMaskInstalled = () => {
+    return Boolean(ethereum && ethereum.isMetaMask)
   }
 
-  const preventDefault = event => event.preventDefault()
+  const MetaMaskClientCheck = () => {
+    //Now we check to see if MetaMask is installed
+    if (!isMetaMaskInstalled()) {
+      alert(
+        'Metamask has not installed yet, please install Metamask wallet first!'
+      )
+      return false
+    } else {
+      return true
+    }
+  }
 
+  const onClickConnect = async () => {
+    try {
+      // Will open the MetaMask UI
+      // You should disable this button while the request is pending!
+      const walletId = await ethereum.request({ method: 'eth_requestAccounts' })
+      if (walletId) {
+        setWalletId(walletId)
+        console.log(walletId)
+        return walletId
+      } else {
+        alert('WalletId is empty???')
+        return null
+      }
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
+  const onClickHandler = async e => {
+    e.preventDefault()
+
+    if (walletId) {
+      history.push(PATHS.ACCOUNT)
+    } else {
+      if (MetaMaskClientCheck()) {
+        const res = await onClickConnect()
+        if (res) {
+          // TODO axios call
+          history.push(PATHS.ACCOUNT)
+        }
+      } else {
+        return
+      }
+    }
+  }
   return (
-    <div className={classes.grow}>
-      <AppBar className={classes.appBar} position={'static'}>
-        <ToolBar>
-          <IconButton
-            edge={'start'}
-            className={classes.menuButton}
-            color={'inherit'}
-            aria-label={'open drawer'}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant={'h6'} noWrap>
-            Tokma Marketplace
-          </Typography>
-          <div className={classes.grow} />
-          <CustomButton variant='contained' edge='end' onClick={handleOpen}>
-            Connect Wallet
-          </CustomButton>
-          <Modal
-            aria-labelledby='transition-modal-title'
-            aria-describedby='transition-modal-description'
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-              <div className={classes.modalContent}>
-                <h2 id='transition-modal-title'>Connect your wallet</h2>
-                <p id='transition-modal-description'>
-                  By connecting your wallet, you agree to our{' '}
-                  <CustomLink href='#' onClick={preventDefault}>
-                    Terms of Service
-                  </CustomLink>{' '}
-                  and our{' '}
-                  <CustomLink href='#' onClick={preventDefault}>
-                    Privacy Policy
-                  </CustomLink>
-                  .
-                  <WalletConnectButton variant='contained' />
-                  New to Ethereum?
-                  <br />
-                  <CustomLink href='#' onClick={preventDefault}>
-                    Learn more about wallets
-                  </CustomLink>
-                </p>
-              </div>
-            </Fade>
-          </Modal>
-        </ToolBar>
-      </AppBar>
-    </div>
+    <HeaderWrapper>
+      <Logo />
+      <SearchLine placeholder={'Search tradings, creators'} />
+      <Navbar />
+      {isLoading ? (
+        <Loading />
+      ) : isLoggedIn ? (
+        <Avatar
+          source={AVATAR}
+          accountId={'kitmist'}
+          walletId={walletId}
+          status={true}
+          onClick={e => onClickHandler(e)}
+        />
+      ) : (
+        <Avatar onClick={e => onClickHandler(e)} />
+      )}
+    </HeaderWrapper>
   )
 }
 

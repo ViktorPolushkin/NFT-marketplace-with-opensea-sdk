@@ -1,16 +1,11 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 import App from 'containers/App'
 import reportWebVitals from './reportWebVitals'
 
 import 'styles/app.css'
 
-render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  document.getElementById('root')
-)
+render(<App />, document.getElementById('root'))
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

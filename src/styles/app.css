@@ -5,8 +5,47 @@ body {
   padding: 0;
   outline: 0;
   overflow-x: hidden;
+  background-color: #86a7d0;
 }
 
 * {
   box-sizing: border-box;
+  font-family: "Be Vietnam", sans-serif;
+  font-weight: 300;
+  color: white;
+  transition: .5s;
+}
+
+#root {
+  margin: 20px;
+  height: 100%;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #66bbc6dd transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-track:hover {
+  background: #262b2f44;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #262b2f80;
+  border-radius: 20px;
+  border: 2px solid transparent;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #262b2fdd;
+  border-radius: 20px;
+  border: 2px solid transparent;
 }

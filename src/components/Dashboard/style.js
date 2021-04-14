@@ -1,5 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-const useStyles = makeStyles(theme => ({}))
-
-export default useStyles
+export const DashboardWrapper = styled.div`
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 10px;
+  overflow: hidden;
+`

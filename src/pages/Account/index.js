@@ -2,11 +2,9 @@ import React from 'react'
 
 import AccountContainer from 'containers/Account'
 
-import useStyles from './style'
+import {} from './style'
 
 const Account = () => {
-  const classes = useStyles()
-
   return <AccountContainer />
 }
 
