@@ -1,8 +1,9 @@
 const PATHS = {
   DASHBOARD: '/',
   ACCOUNT: '/account',
-  TRADINGS: '/tradings',
-  CREATORS: '/creators'
+  BROWSE_ASSETS: '/assets',
+  CREATORS: '/creators',
+  COLLECTIONS: '/collections',
 }
 
 export default PATHS

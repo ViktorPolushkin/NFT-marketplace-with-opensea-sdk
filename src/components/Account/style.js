@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 
-const useStyles = makeStyles(theme => ({}))
-
-export default useStyles
+export const AccountWrapper = styled.div`
+  width: 100%;
+`

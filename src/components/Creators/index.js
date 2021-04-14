@@ -1,11 +1,9 @@
 import React from 'react'
 
-import useStyles from './style'
+import { CreatorsWrapper } from './style'
 
 const Creators = () => {
-  const classes = useStyles()
-
-  return <div>Creators Page in Components</div>
+  return <CreatorsWrapper>Creators</CreatorsWrapper>
 }
 
 export default Creators
