@@ -22,6 +22,10 @@ export const SearchLineInput = styled.input`
   &:focus {
     box-shadow: 0 0 10px 1px #262b2f;
   }
+
+  @media (max-width: 768px) {
+    overflow: hidden;
+  }
 `
 
 export const SearchLineIcon = styled.label`

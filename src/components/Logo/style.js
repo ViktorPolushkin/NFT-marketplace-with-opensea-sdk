@@ -13,4 +13,8 @@ export const AppName = styled.div`
   font-size: 18px;
   color: white;
   cursor: pointer;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `
