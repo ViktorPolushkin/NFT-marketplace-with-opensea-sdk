@@ -3,7 +3,7 @@ const PATHS = {
   BROWSE_ASSETS: '/assets',
   CREATORS: '/creators',
   COLLECTIONS: '/collections',
-  ACCOUNT: '/account',
+  PROFILE: '/profile',
 }
 
 export default PATHS

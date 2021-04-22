@@ -13,7 +13,7 @@ import Dashboard from 'pages/Dashboard'
 import Browse from 'pages/Browse'
 import Creators from 'pages/Creators'
 import Collections from 'pages/Collections'
-import Account from 'pages/Account'
+import Profile from 'pages/Profile'
 
 import { Spin } from 'antd'
 
@@ -29,7 +29,7 @@ const Router = ({ auth }) => (
       {auth.token && (
         <>
           <Route path={PATHS.COLLECTIONS} component={Collections} />
-          <Route path={PATHS.ACCOUNT} component={Account} />
+          <Route path={PATHS.PROFILE} component={Profile} />
         </>
       )}
       <Route

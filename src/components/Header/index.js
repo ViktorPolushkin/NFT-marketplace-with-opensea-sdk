@@ -31,7 +31,7 @@ const PopoverHeader = ({ avatar, nickname, walletId }) => (
 
 const PopoverMenu = () => (
   <div className='pop-over-body-wrap'>
-    <Link to={PATHS.ACCOUNT}>
+    <Link to={PATHS.PROFILE}>
       <ProfileFilled />
       <span>Profile</span>
     </Link>

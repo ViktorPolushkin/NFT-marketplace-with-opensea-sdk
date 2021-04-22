@@ -65,7 +65,7 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
     }
 
     if (isAuthenticated()) {
-      history.push(PATHS.ACCOUNT)
+      history.push(PATHS.PROFILE)
       return
     }
 
@@ -79,7 +79,7 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
           walletId: res[0],
         },
         success: () => {
-          history.push(PATHS.ACCOUNT)
+          history.push(PATHS.PROFILE)
         },
       })
     }
