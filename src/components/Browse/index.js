@@ -1,16 +1,31 @@
 import React from 'react'
+import { PageHeader } from 'antd'
+import { generateCards } from 'helpers'
 
-import CollectionBrowser from 'components/CollectionBrowser'
-import FilterBar from 'components/FilterBar'
+import './style.less'
 
-import { BrowseWrapper } from './style'
-
-const Browse = () => {
+const Browse = ({
+  collections,
+  onViewCollection,
+  onClickLike,
+  onClickCard,
+}) => {
   return (
-    <BrowseWrapper>
-      <FilterBar />
-      <CollectionBrowser />
-    </BrowseWrapper>
+    <div className='browse'>
+      <div className='browse-page-header'>
+        <PageHeader className='browse-page-header-title' title={'Browses'} />
+      </div>
+      <div className='browse-assets'>
+        <div className='browse-assets-wrap'>
+          {generateCards(
+            collections,
+            onViewCollection,
+            onClickLike,
+            onClickCard
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 

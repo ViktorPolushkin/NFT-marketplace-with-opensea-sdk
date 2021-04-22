@@ -1,0 +1,87 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 336px;
+  margin: 8px;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &-image {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+  }
+
+  &-info {
+    display: flex;
+    color: #005249;
+    background-color: #c8facd;
+
+    &-collection {
+      flex: 3 0 0%;
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: 60% 40%;
+      min-height: 72px;
+      padding: 8px 16px;
+
+      & > div {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    &-title {
+      font-size: 18px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+
+    &-value {
+      font-size: 14px;
+      text-overflow: ellipsis;
+    }
+
+    &-likes-views {
+      flex: 1 0 0%;
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: 60% 40%;
+      justify-content: flex-end;
+      min-height: 72px;
+      padding: 8px 16px;
+
+      & > div {
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        & > span {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    &-likes {
+      text-overflow: ellipsis;
+
+      &:hover {
+        color: #7a0c2e;
+      }
+    }
+
+    &-views {
+      text-overflow: ellipsis;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 8px 15px 1px #0008;
+  }
+}

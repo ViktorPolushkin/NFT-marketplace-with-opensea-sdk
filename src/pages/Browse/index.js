@@ -2,10 +2,14 @@ import React from 'react'
 
 import BrowseContainer from 'containers/Browse'
 
-import {} from './style'
+import 'styles/style.less'
 
 const Browse = () => {
-  return <BrowseContainer />
+  return (
+    <div className='page'>
+      <BrowseContainer />
+    </div>
+  )
 }
 
 export default Browse

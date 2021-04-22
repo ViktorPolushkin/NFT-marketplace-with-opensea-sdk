@@ -2,10 +2,14 @@ import React from 'react'
 
 import CollectionsContainer from 'containers/Collections'
 
-import {} from './style'
+import 'styles/style.less'
 
 const Collections = () => {
-  return <CollectionsContainer />
+  return (
+    <div className='page'>
+      <CollectionsContainer />
+    </div>
+  )
 }
 
 export default Collections

@@ -10,8 +10,6 @@ import HeaderComponent from 'components/Header'
 
 import PATHS from 'constants/Path'
 
-import AVATAR from 'resources/avatar.png'
-
 const Header = ({ auth, loginAction, ...otherProps }) => {
   const [waitingWallet, setWaitingWallet] = useState(false)
   const { status, token, error } = auth
@@ -19,7 +17,6 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
   const { ethereum } = window
 
   const isPending = status => {
-    console.log('pending Status:', status.indexOf(IS_PENDING))
     return status.indexOf(IS_PENDING) > -1
   }
 
@@ -90,8 +87,7 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
 
   return (
     <HeaderComponent
-      avatar={AVATAR}
-      auth={auth}
+      avatar={false}
       nickname={'Person'}
       walletId={'123123123123123'}
       isPending={isPending(status) || waitingWallet}

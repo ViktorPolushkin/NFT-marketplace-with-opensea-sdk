@@ -1,0 +1,35 @@
+.browse {
+  width: 100%;
+
+  &-page-header {
+    display: flex;
+    width: 100%;
+
+    &-title {
+      width: 100%;
+    }
+  }
+
+  &-assets {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &-wrap {
+      max-width: 1280px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+
+      @media (max-width: 1056px) {
+        grid-template-columns: 33% 33% 33%;
+      }
+      @media (max-width: 816px) {
+        grid-template-columns: 50% 50%;
+      }
+      @media (max-width: 576px) {
+        grid-template-columns: 100%;
+      }
+    }
+  }
+}

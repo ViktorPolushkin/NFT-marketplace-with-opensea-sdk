@@ -1,9 +1,14 @@
 import React from 'react'
+import { PageHeader } from 'antd'
 
-import { CreatorsWrapper } from './style'
+import './style.less'
 
 const Creators = () => {
-  return <CreatorsWrapper>Creators</CreatorsWrapper>
+  return (
+    <div className='creators'>
+      <PageHeader className='creators-page-header' title={'Creators'} />
+    </div>
+  )
 }
 
 export default Creators

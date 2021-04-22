@@ -1,13 +1,9 @@
 import React from 'react'
 
-import { FooterWrapper, FooterInfo } from './style'
+import './style.less'
 
-const Footer = () => (
-  <FooterWrapper>
-    <FooterInfo>2021 Demo Maker</FooterInfo>
-    Opensea Demo NFT marketplace
-    <FooterInfo>@Viktor Polushkin</FooterInfo>
-  </FooterWrapper>
-)
+const Footer = () => {
+  return <footer className='footer'>NFT marketplace demo</footer>
+}
 
 export default Footer

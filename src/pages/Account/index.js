@@ -2,10 +2,14 @@ import React from 'react'
 
 import AccountContainer from 'containers/Account'
 
-import {} from './style'
+import 'styles/style.less'
 
 const Account = () => {
-  return <AccountContainer />
+  return (
+    <div className='page'>
+      <AccountContainer />
+    </div>
+  )
 }
 
 export default Account

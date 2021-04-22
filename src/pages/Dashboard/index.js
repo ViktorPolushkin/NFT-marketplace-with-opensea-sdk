@@ -2,10 +2,14 @@ import React from 'react'
 
 import DashboardContainer from 'containers/Dashboard'
 
-import {} from './style'
+import 'styles/style.less'
 
 const Dashboard = () => {
-  return <DashboardContainer />
+  return (
+    <div className='page'>
+      <DashboardContainer />
+    </div>
+  )
 }
 
 export default Dashboard

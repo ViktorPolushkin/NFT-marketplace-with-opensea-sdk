@@ -1,44 +1,122 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { Menu, Popover, Avatar, Button } from 'antd'
+import {
+  ProfileFilled,
+  LoadingOutlined,
+  LogoutOutlined,
+  MenuOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 
-import Logo from 'components/Logo'
-import SearchLine from 'components/SearchLine'
-import Navbar from 'components/Navbar'
-import Avatar from 'components/Avatar'
-import Loading from 'components/Loading'
+import PATHS from 'constants/Path'
 
-import { HeaderWrapper } from './style'
+import LOGO from 'resources/logo_single.svg'
+
+import './style.less'
+
+const PopoverHeader = ({ avatar, nickname, walletId }) => (
+  <div className='pop-over'>
+    <div className='pop-over-info'>
+      <div className='pop-over-info-name'>{nickname}</div>
+      <div className='pop-over-info-walletId'>{walletId}</div>
+    </div>
+    <Avatar
+      size={'large'}
+      src={avatar}
+      icon={!avatar && <UserOutlined />}
+    ></Avatar>
+  </div>
+)
+
+const PopoverMenu = () => (
+  <div className='pop-over-body-wrap'>
+    <Link to={PATHS.ACCOUNT}>
+      <ProfileFilled />
+      <span>Profile</span>
+    </Link>
+    <Button icon={<LogoutOutlined />}>Logout</Button>
+  </div>
+)
+
+const ignoreHref = e => {
+  e.preventDefault()
+}
 
 const Header = ({
-  auth,
-  walletId,
-  nickname,
   avatar,
+  nickname,
+  walletId,
   isPending,
   isAuthenticated,
   isError,
   loginHandler,
   ...otherProps
-}) => {
-  return (
-    <HeaderWrapper>
-      <Logo />
-      <SearchLine placeholder={'Search collections, creators'} />
-      <Navbar />
-      {isPending ? (
-        <Loading />
-      ) : isAuthenticated ? (
-        <Avatar
-          source={avatar}
-          accountId={nickname}
-          walletId={walletId}
-          status={true}
-          onClick={loginHandler}
-        />
-      ) : (
-        <Avatar onClick={loginHandler} />
+}) => (
+  <header className='header'>
+    <Link to={PATHS.DASHBOARD}>
+      <img src={LOGO} alt={'app logo'} height={48} />
+    </Link>
+    <div className='expander'></div>
+    <Menu
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        backgroundColor: 'transparent',
+        borderBottom: 0,
+        maxWidth: 400,
+      }}
+      mode='horizontal'
+      expandIcon={<MenuOutlined />}
+    >
+      <Menu.Item className='menu-item' key={'assets'}>
+        <Link to={PATHS.BROWSE_ASSETS}>Browse</Link>
+      </Menu.Item>
+      <Menu.Item className='menu-item' key={'creators'}>
+        <Link to={PATHS.CREATORS}>Creators</Link>
+      </Menu.Item>
+      {isAuthenticated && (
+        <Menu.Item className='menu-item' key={'collections'}>
+          <Link to={PATHS.COLLECTIONS}>Create</Link>
+        </Menu.Item>
       )}
-    </HeaderWrapper>
-  )
-}
+      {isAuthenticated ? (
+        <Menu.Item className='menu-item' key={'account'}>
+          <Popover
+            placement={'bottomLeft'}
+            title={
+              <PopoverHeader
+                avatar={avatar}
+                nickname={nickname}
+                walletId={walletId}
+              />
+            }
+            content={<PopoverMenu />}
+            trigger='click'
+          >
+            <a href={'/'} onClick={e => ignoreHref(e)}>
+              Account
+            </a>
+          </Popover>
+        </Menu.Item>
+      ) : isPending ? (
+        <Menu.Item className='menu-item' key={'account'}>
+          <LoadingOutlined />
+        </Menu.Item>
+      ) : (
+        <Menu.Item
+          className='menu-item'
+          key={'account'}
+          onClick={() => loginHandler()}
+        >
+          <a href={'/'} className='connect-wallet' onClick={e => ignoreHref(e)}>
+            Connect Wallet
+          </a>
+        </Menu.Item>
+      )}
+    </Menu>
+  </header>
+)
 
 export default Header

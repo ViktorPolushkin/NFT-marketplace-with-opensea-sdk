@@ -2,10 +2,14 @@ import React from 'react'
 
 import CreatorsContainer from 'containers/Creators'
 
-import {} from './style'
+import 'styles/style.less'
 
 const Creators = () => {
-  return <CreatorsContainer />
+  return (
+    <div className='page'>
+      <CreatorsContainer />
+    </div>
+  )
 }
 
 export default Creators

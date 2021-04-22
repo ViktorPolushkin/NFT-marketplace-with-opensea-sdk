@@ -1,0 +1,47 @@
+.dashboard {
+  width: 100%;
+
+  &-carousel {
+    height: 360px;
+    padding: 8px;
+    border: 1px dashed #c8facd;
+    overflow: hidden;
+    border-radius: 2px;
+
+    &-image {
+      position: relative;
+      width: 100%;
+
+      &-wrap {
+        width: 100%;
+        height: 344px;
+        overflow: hidden;
+        border-radius: 2px;
+      }
+
+      &-info {
+        position: absolute;
+        top: 48px;
+        left: 64px;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+
+        & > span {
+          font-size: 24px;
+          margin-bottom: 144px;
+        }
+
+        & > button {
+          width: 300px;
+        }
+      }
+    }
+  }
+
+  &-listings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

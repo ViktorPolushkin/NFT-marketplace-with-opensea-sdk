@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { authStateSelector } from 'redux/selectors'
+import { createStructuredSelector } from 'reselect'
+
+import { IS_PENDING } from 'constants/Constants'
 
 import Header from 'containers/Header'
 import Footer from 'components/Footer'
@@ -10,22 +15,48 @@ import Creators from 'pages/Creators'
 import Collections from 'pages/Collections'
 import Account from 'pages/Account'
 
+import { Spin } from 'antd'
+
 import PATHS from 'constants/Path'
 
-const Routers = () => {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route exact path={PATHS.DASHBOARD} component={Dashboard} />
-        <Route path={PATHS.BROWSE_ASSETS} component={Browse} />
-        <Route path={PATHS.CREATORS} component={Creators} />
-        <Route path={PATHS.COLLECTIONS} component={Collections} />
-        <Route path={PATHS.ACCOUNT} component={Account} />
-      </Switch>
-      <Footer />
-    </BrowserRouter>
+const Router = ({ auth }) => (
+  <BrowserRouter>
+    <Header auth={auth} />
+    <Switch>
+      <Route exact path={PATHS.DASHBOARD} component={Dashboard} />
+      <Route path={PATHS.BROWSE_ASSETS} component={Browse} />
+      <Route path={PATHS.CREATORS} component={Creators} />
+      {auth.token && (
+        <>
+          <Route path={PATHS.COLLECTIONS} component={Collections} />
+          <Route path={PATHS.ACCOUNT} component={Account} />
+        </>
+      )}
+      <Route
+        path={''}
+        render={() => !auth.token && <Redirect to={PATHS.DASHBOARD} />}
+      />
+    </Switch>
+    <Footer />
+  </BrowserRouter>
+)
+
+const RouterWithSpinner = ({ auth }) => (
+  <Spin tip={'Please wait...'}>
+    <Router auth={auth} />
+  </Spin>
+)
+
+const Routers = ({ auth }) => {
+  return auth.status.indexOf(IS_PENDING) > -1 ? (
+    <RouterWithSpinner auth={auth} />
+  ) : (
+    <Router auth={auth} />
   )
 }
 
-export default Routers
+const mapStateToProps = createStructuredSelector({
+  auth: authStateSelector,
+})
+
+export default connect(mapStateToProps, null)(Routers)

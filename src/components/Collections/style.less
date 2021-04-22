@@ -1,0 +1,83 @@
+.collections {
+  width: 100%;
+
+  &-page-header {
+    display: flex;
+    width: 100%;
+
+    &-title {
+      width: 100%;
+    }
+  }
+
+  &-assets {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &-wrap {
+      max-width: 1280px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+
+      @media (max-width: 1056px) {
+        grid-template-columns: 33% 33% 33%;
+      }
+      @media (max-width: 816px) {
+        grid-template-columns: 50% 50%;
+      }
+      @media (max-width: 576px) {
+        grid-template-columns: 100%;
+      }
+    }
+  }
+
+  &-creator {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+
+      &-file-reader {
+        display: flex;
+        padding: 64px 64px 32px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        & > span {
+          width: auto;
+        }
+      }
+
+      &-name {
+        padding: 12px;
+        width: 100%;
+      }
+
+      &-bio {
+        padding: 12px;
+        width: 100%;
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      height: 64px;
+
+      & > button:not(:last-child) {
+        margin-right: 16px;
+      }
+    }
+  }
+}

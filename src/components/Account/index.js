@@ -1,15 +1,9 @@
 import React from 'react'
 
-import AccountBanner from 'components/AccountBanner'
-
-import { AccountWrapper } from './style'
+import './style.less'
 
 const Account = () => {
-  return (
-    <AccountWrapper>
-      <AccountBanner />
-    </AccountWrapper>
-  )
+  return <div>Account</div>
 }
 
 export default Account

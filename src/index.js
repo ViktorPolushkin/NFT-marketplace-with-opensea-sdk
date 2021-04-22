@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import App from 'containers/App'
 import reportWebVitals from './reportWebVitals'
 
-import 'styles/app.css'
+import 'styles/style.less'
 
 render(<App />, document.getElementById('root'))
 
