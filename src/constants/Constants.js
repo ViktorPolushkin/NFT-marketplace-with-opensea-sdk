@@ -12,3 +12,9 @@ export const IS_FAILURE = 'FAILURE'
 // ! Attention : No signup action required, because in backend, if no user, save user.
 export const DO_LOGIN = 'DO_LOGIN'
 export const DO_LOGOUT = 'DO_LOGOUT'
+
+// * PROFILE CONSTANTS
+export const DO_REQUEST_PROFILE = 'DO_REQUEST_PROFILE'
+export const DO_UPDATE_PROFILE = 'DO_UPDATE_PROFILE'
+
+//

@@ -18,9 +18,9 @@ const defaultHeaders = () => {
 
   if (auth) {
     const token = JSON.parse(auth).token
-    headers['Authorization'] = 'JWT ' + token
+    headers['Authorization'] = 'Bearer ' + token
   }
-
+  
   return headers
 }
 

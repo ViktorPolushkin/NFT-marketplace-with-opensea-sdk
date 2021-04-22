@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { PageHeader, Input, Button, Upload, message } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
@@ -8,19 +8,29 @@ import './style.less'
 const { TextArea } = Input
 
 const Profile = ({
+  isUploading = true,
   bannerUrl,
-  avatar,
-  name,
+  avatarUrl,
+  nickname,
   email,
-  userName,
   bio,
   website,
   discord,
+  onClickHandler,
+  onChangeHandler,
+  onError,
 }) => {
   const [bannerImage, setBannerImage] = useState('')
   const [avatarImage, setAvatarImage] = useState('')
+  const [bannerFile, setBannerFile] = useState(null)
+  const [avatarFile, setAvatarFile] = useState(null)
   const [isBannerUploading, setBannerUploading] = useState(false)
   const [isAvatarUploading, setAvatarUploading] = useState(false)
+
+  useEffect(() => {
+    bannerUrl && setBannerImage(bannerUrl)
+    avatarUrl && setAvatarImage(avatarUrl)
+  }, [bannerUrl, avatarUrl])
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader()
@@ -41,6 +51,7 @@ const Profile = ({
   }
 
   const handleChange = (info, isBanner = false) => {
+    console.log(info)
     if (info.file.status === 'uploading') {
       if (isBanner) {
         setBannerUploading(true)
@@ -53,9 +64,11 @@ const Profile = ({
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, image => {
         if (isBanner) {
+          setBannerFile(info.file)
           setBannerImage(image)
           setBannerUploading(false)
         } else {
+          setAvatarFile(info.file)
           setAvatarImage(image)
           setAvatarUploading(false)
         }
@@ -98,15 +111,21 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Email :</div>
           <Input
+            name={'email'}
             addonAfter={'.com'}
             placeholder={'Please fill your email in here'}
+            value={email}
+            onChange={e => onChangeHandler(e)}
           />
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Nickname :</div>
           <Input
+            name={'nickname'}
             addonBefore={'@'}
             placeholder={'Please fill your email in here'}
+            value={nickname}
+            onChange={e => onChangeHandler(e)}
           />
         </div>
         <div className='profile-edit-field'>
@@ -154,25 +173,42 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Bio :</div>
           <TextArea
+            name={'bio'}
             rows={4}
             placeholder={'Please note about you shortly. (Max 300 characters)'}
             maxLength={300}
+            value={bio}
+            onChange={e => onChangeHandler(e)}
           />
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Website :</div>
           <Input
+            name={'website'}
             addonBefore={'www.'}
             addonAfter={'.com'}
             placeholder={'example'}
+            value={website}
+            onChange={e => onChangeHandler(e)}
           />
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Discord :</div>
-          <Input placeholder={'Please include #Code'} />
+          <Input
+            name={'discord'}
+            placeholder={'Please include #Code'}
+            value={discord}
+            onChange={e => onChangeHandler(e)}
+          />
         </div>
         <div className='profile-edit-save'>
-          <Button type='primary'>Save Changes</Button>
+          <Button
+            type='primary'
+            loading={isUploading}
+            onClick={() => onClickHandler(bannerFile, avatarFile)}
+          >
+            Save Changes
+          </Button>
         </div>
       </div>
     </div>
