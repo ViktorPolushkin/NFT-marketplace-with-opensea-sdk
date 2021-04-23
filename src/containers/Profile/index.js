@@ -52,63 +52,82 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
       return
     }
 
-    const uploadTask = storage
-      .ref(`/images/${imageFile.uid}`)
-      .put(imageFile.originFileObj)
+    return new Promise((resolve, reject) => {
+      const uploadTask = storage
+        .ref(`/images/${imageFile.uid}`)
+        .put(imageFile.originFileObj)
 
-    uploadTask.on(
-      'state_changed',
-      snapshot => {
-        console.log(snapshot)
-      },
-      error => {
-        setHasError(error.message)
-        return
-      },
-      () => {
-        storage
-          .ref('images')
-          .child(imageFile.uid)
-          .getDownloadURL()
-          .then(firebaseUrl => {
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          console.log(snapshot)
+        },
+        error => {
+          setHasError(error.message)
+          reject()
+        },
+        async () => {
+          const firebaseUrl = await storage
+            .ref('images')
+            .child(imageFile.uid)
+            .getDownloadURL()
+
+          if (firebaseUrl) {
             if (isBanner) {
               setBannerUrl(firebaseUrl)
+              console.log('banner', firebaseUrl)
+              resolve([firebaseUrl, isBanner])
             } else {
               setAvatarUrl(firebaseUrl)
+              console.log('avatar', firebaseUrl)
+              resolve([firebaseUrl, isBanner])
             }
-          })
-          .catch(error => {
-            console.error(error)
-            setHasError(error.message)
-            return
-          })
-      }
-    )
+          }
+        }
+      )
+    })
   }
 
-  const onClickHandler = async (banner, avatar) => {
+  const onClickHandler = (banner, avatar) => {
     setUploading(true)
-    console.log('Banner:', banner, 'Avatar:', avatar)
-    await handleFirebaseUpload(banner, true)
-    await handleFirebaseUpload(avatar)
+    let promises = []
+    promises.push(handleFirebaseUpload(banner, true))
+    promises.push(handleFirebaseUpload(avatar))
 
-    if (hasError) {
-      return
-    }
+    Promise.all(promises).then(datas => {
+      let banner
+      let avatar
 
-    updateProfileAction({
-      body: {
-        bannerUrl,
-        avatarUrl,
-        nickname,
-        email,
-        bio,
-        website,
-        discord,
-      },
+      datas.forEach(data => {
+        if (data[1]) {
+          banner = data[0]
+        } else {
+          avatar = data[0]
+        }
+      })
+
+      if (hasError) {
+        return
+      }
+
+      updateProfileAction({
+        body: {
+          bannerUrl: banner,
+          avatarUrl: avatar,
+          nickname,
+          email,
+          bio,
+          website,
+          discord,
+        },
+        onSuccess: () => {
+          setUploading(false)
+        },
+        onFailure: () => {
+          setUploading(false)
+        },
+      })
     })
-
-    setUploading(false)
   }
 
   const onChangeHandler = event => {

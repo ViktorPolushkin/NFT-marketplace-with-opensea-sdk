@@ -20,7 +20,7 @@ const defaultHeaders = () => {
     const token = JSON.parse(auth).token
     headers['Authorization'] = 'Bearer ' + token
   }
-  
+
   return headers
 }
 
@@ -55,8 +55,6 @@ const apiCaller = ({
         data: body,
         params,
       })
-
-      console.log('Res from server:', res)
 
       // * Call callback functions of reducer & redux-saga
       onSuccess && onSuccess(res)

@@ -9,6 +9,8 @@ const firebaseConfig = {
   projectId: 'image-upload-with-react',
   storageBucket: 'image-upload-with-react.appspot.com',
   appId: '1:281964409838:web:f5b7765318c23d0748d4ff',
+  // messagingSenderId: '281964409838',
+  // measurementId: 'super secret as;dlkfjal;dskjf',
 }
 
 firebase.initializeApp(firebaseConfig)
