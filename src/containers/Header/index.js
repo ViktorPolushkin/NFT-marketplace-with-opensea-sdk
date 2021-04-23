@@ -1,20 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { authStateSelector } from 'redux/selectors'
-import { loginAction } from 'redux/Reducers/Auth'
-import { IS_PENDING } from 'constants/Constants'
+import { authStateSelector, profileStateSelector } from 'redux/selectors'
+import { loginAction, logoutAction } from 'redux/Reducers/Auth'
+import { getProfileAction } from 'redux/Reducers/Profile'
+import { APP_NAME, IS_PENDING } from 'constants/Constants'
 
 import HeaderComponent from 'components/Header'
 
 import PATHS from 'constants/Path'
 
-const Header = ({ auth, loginAction, ...otherProps }) => {
-  const [waitingWallet, setWaitingWallet] = useState(false)
-  const { status, token, error } = auth
-  const history = useHistory()
+const Header = ({
+  auth,
+  profile,
+  loginAction,
+  logoutAction,
+  getProfileAction,
+  ...otherProps
+}) => {
   const { ethereum } = window
+  const { payload } = profile
+  const { status, token, error } = auth
+
+  const [waitingWallet, setWaitingWallet] = useState(false)
+
+  const history = useHistory()
 
   const isPending = status => {
     return status.indexOf(IS_PENDING) > -1
@@ -78,22 +89,31 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
         body: {
           walletId: res[0],
         },
-        success: () => {
-          history.push(PATHS.PROFILE)
+        onSuccess: response => {
+          getProfileAction({
+            header: { Authorization: `Bearer ${response.data.token}` },
+          })
         },
       })
     }
   }
 
+  const logoutHandler = () => {
+    logoutAction({
+      onSuccess: localStorage.removeItem(APP_NAME),
+    })
+  }
+
   return (
     <HeaderComponent
-      avatar={false}
-      nickname={'Person'}
-      walletId={'123123123123123'}
+      avatar={payload ? payload.avatarUrl : false}
+      nickname={payload ? payload.nickname : 'Person'}
+      walletId={payload ? payload.walletId : ''}
       isPending={isPending(status) || waitingWallet}
       isAuthenticated={isAuthenticated()}
       isError={isError()}
-      loginHandler={() => loginHandler()}
+      loginHandler={loginHandler}
+      logoutHandler={logoutHandler}
       {...otherProps}
     />
   )
@@ -101,10 +121,13 @@ const Header = ({ auth, loginAction, ...otherProps }) => {
 
 const mapStateToProps = createStructuredSelector({
   auth: authStateSelector,
+  profile: profileStateSelector,
 })
 
 const mapDispatchToProps = {
   loginAction,
+  logoutAction,
+  getProfileAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

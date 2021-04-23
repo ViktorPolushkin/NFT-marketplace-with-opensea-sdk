@@ -5,9 +5,9 @@ import { profileStateSelector } from 'redux/selectors'
 import { getProfileAction, updateProfileAction } from 'redux/Reducers/Profile'
 import { IS_PENDING } from 'constants/Constants'
 
-import ProfileComponent from 'components/Profile'
-
 import { storage } from 'configuration/Firebase'
+
+import ProfileComponent from 'components/Profile'
 
 const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
   const { status, payload, error } = profile

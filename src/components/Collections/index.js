@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { PageHeader, Button, Drawer, Input, Upload, message } from 'antd'
+import {
+  PageHeader,
+  Button,
+  Drawer,
+  Input,
+  InputNumber,
+  Upload,
+  message,
+} from 'antd'
 import {
   PlusCircleOutlined,
   LoadingOutlined,
@@ -36,8 +44,12 @@ const Collections = ({
   onClickLike,
   onClickCard,
   onCreateCollection,
+  onChangeHandler,
+  onFeeChangeHandler,
+  // isLoading,
 }) => {
   const [imageUrl, setImageUrl] = useState('')
+  const [imageFile, setImageFile] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
 
@@ -49,6 +61,7 @@ const Collections = ({
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
+        setImageFile(info.file)
         setImageUrl(imageUrl)
         setIsUploading(false)
       })
@@ -149,17 +162,38 @@ const Collections = ({
               </ImgCrop>
             </div>
             <div className='collections-creator-info-name'>
-              <Input placeholder='Example: Treasures of the sea' />
+              <Input
+                name={'name'}
+                placeholder='Name of new collection'
+                onChange={e => onChangeHandler(e)}
+              />
             </div>
             <div className='collections-creator-info-bio'>
               <TextArea
+                name={'bio'}
                 placeholder='Provide description for your collection.'
                 rows={4}
+                onChange={e => onChangeHandler(e)}
+              />
+            </div>
+            <div className='collections-creator-info-fee'>
+              <InputNumber
+                style={{ width: '100%' }}
+                name={'fee'}
+                min={0}
+                max={10}
+                step={0.01}
+                placeholder={`Fee can't be more than 10`}
+                onChange={value => onFeeChangeHandler(value)}
               />
             </div>
           </div>
           <div className='collections-creator-buttons'>
-            <Button type='primary' onClick={() => onCreateCollection()}>
+            <Button
+              // loading={isLoading}
+              type='primary'
+              onClick={() => onCreateCollection(imageFile)}
+            >
               Create collection
             </Button>
             <Button onClick={() => onClose()}>Cancel</Button>

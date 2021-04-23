@@ -141,7 +141,7 @@ const Profile = ({
               onChange={info => handleChange(info, true)}
               onPreview={onPreview}
             >
-              {bannerImage ? (
+              {!isBannerUploading && bannerImage ? (
                 <img src={bannerImage} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadBannerButton
@@ -162,7 +162,7 @@ const Profile = ({
               onChange={handleChange}
               onPreview={onPreview}
             >
-              {avatarImage ? (
+              {!isAvatarUploading && avatarImage ? (
                 <img src={avatarImage} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadAvatarButton

@@ -9,30 +9,30 @@ const Browse = () => {
   const history = useHistory()
 
   const collections = [
-    {
-      owner: 'anonymous',
-      collectionId: '1234567890',
-      url: null,
-      title: 'One of a kind NFT',
-      value: 12,
-      inAuction: false,
-      lastBid: 22,
-      rate: 600,
-      likes: 3,
-      views: 18,
-    },
-    {
-      owner: 'anonymous',
-      collectionId: '1234567891',
-      url: null,
-      title: 'One of a NFT Card with Awesome Future',
-      value: 1906,
-      inAuction: false,
-      lastBid: 17,
-      rate: 800,
-      likes: 201,
-      views: 1000,
-    },
+    // {
+    //   owner: 'anonymous',
+    //   collectionId: '1234567890',
+    //   url: null,
+    //   title: 'One of a kind NFT',
+    //   value: 12,
+    //   inAuction: false,
+    //   lastBid: 22,
+    //   rate: 600,
+    //   likes: 3,
+    //   views: 18,
+    // },
+    // {
+    //   owner: 'anonymous',
+    //   collectionId: '1234567891',
+    //   url: null,
+    //   title: 'One of a NFT Card with Awesome Future',
+    //   value: 1906,
+    //   inAuction: false,
+    //   lastBid: 17,
+    //   rate: 800,
+    //   likes: 201,
+    //   views: 1000,
+    // },
   ]
 
   const onClickLike = () => {}

@@ -37,6 +37,7 @@ const apiCaller = ({
   function* (action) {
     const {
       body, // * REQUEST BODY of reducer
+      header, // * HEADER FROM of reducer
       params, // * REQUEST PARAMS of reducer
       onSuccess, // * SUCCESS CALLBACK for reducer
       onFailure, // * FAILURE CALLBACK for reducer
@@ -51,7 +52,7 @@ const apiCaller = ({
       const res = yield call(axios.request, {
         url: typeof path === 'function' ? path(action) : path,
         method: method.toLowerCase(),
-        headers: Object.assign({}, defaultHeaders(), headers),
+        headers: Object.assign({}, defaultHeaders(), headers, header),
         data: body,
         params,
       })
