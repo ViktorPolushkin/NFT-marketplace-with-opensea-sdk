@@ -1,27 +1,34 @@
+@import '../../styles/vairable.less';
+
 .card {
   display: flex;
   flex-direction: column;
-  height: 336px;
   margin: 8px;
-  border-radius: 2px;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0px 0px 1px 0px #0004, 0px 8px 16px -2px #0004;
 
   &-image {
     position: relative;
-    flex: 100%;
+    padding-top: calc(100%);
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #000;
     overflow: hidden;
+
+    & > img {
+      position: absolute;
+      top: 0;
+    }
   }
 
   &-info {
     display: flex;
     min-height: 72px;
-    color: #005249;
-    background-color: #c8facd;
+    color: #fff;
+    background-color: @card-info-color;
 
     &-collection {
       flex: 3 0 0%;
@@ -74,7 +81,7 @@
       text-overflow: ellipsis;
 
       &:hover {
-        color: #7a0c2e;
+        color: #00ab55;
       }
     }
 
@@ -84,6 +91,6 @@
   }
 
   &:hover {
-    box-shadow: 0 8px 15px 1px #0008;
+    box-shadow: 0px 0px 2px 0px #000a, 0px 16px 32px -4px #000a;
   }
 }

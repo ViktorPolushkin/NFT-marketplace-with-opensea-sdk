@@ -1,0 +1,121 @@
+@import '../../styles/vairable.less';
+
+.creator-card {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 0px #0004, 0px 8px 16px -2px #0004;
+
+  &-image {
+    position: relative;
+    display: flex;
+    padding-top: calc(40%);
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    overflow: hidden;
+
+    &::before {
+      width: 100%;
+      height: 100%;
+      content: '';
+      position: absolute;
+      top: 0;
+      background-color: #0003;
+      backdrop-filter: blur(5px);
+      border-radius: 2px 2px 0 0;
+      z-index: 1;
+    }
+
+    &-background {
+      position: absolute;
+      display: flex;
+      top: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-color: @card-info-color;
+
+    &-avatar {
+      position: absolute;
+      height: 64px;
+      width: 64px;
+      top: -32px;
+      border-radius: 50%;
+      background-color: wheat;
+      z-index: 1;
+
+      &-mask {
+        position: absolute;
+        top: -36px;
+        color: @card-info-color;
+        z-index: 1;
+      }
+    }
+
+    &-name {
+      width: 100%;
+      text-align: center;
+      margin-top: 48px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &-comment {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    &-social {
+      display: flex;
+      justify-content: space-around;
+
+      & > button:not(:last-child) {
+        margin-right: 24px;
+      }
+    }
+  }
+
+  &-properties {
+    padding: 24px 0;
+    width: 100%;
+    display: flex;
+
+    &-items {
+      flex: 1;
+      height: 48px;
+
+      & > div {
+        text-align: center;
+      }
+
+      &-header {
+        color: #919eab;
+        font-size: 14px;
+      }
+
+      &-comment {
+        color: #fff;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 2px 0px #000a, 0px 16px 32px -4px #000a;
+  }
+}

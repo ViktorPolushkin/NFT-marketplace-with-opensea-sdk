@@ -39,6 +39,7 @@ const beforeUpload = file => {
 }
 
 const Collections = ({
+  imageUrl,
   collections,
   onViewCollection,
   onClickLike,
@@ -46,9 +47,8 @@ const Collections = ({
   onCreateCollection,
   onChangeHandler,
   onFeeChangeHandler,
-  // isLoading,
+  customRequest,
 }) => {
-  const [imageUrl, setImageUrl] = useState('')
   const [imageFile, setImageFile] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
@@ -62,7 +62,6 @@ const Collections = ({
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl => {
         setImageFile(info.file)
-        setImageUrl(imageUrl)
         setIsUploading(false)
       })
     }
@@ -74,21 +73,6 @@ const Collections = ({
       <div style={{ marginTop: 8 }}>Upload Photo</div>
     </div>
   )
-
-  const onPreview = async file => {
-    let src = file.url
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file.originFileObj)
-        reader.onload = () => resolve(reader.result)
-      })
-    }
-    const image = new Image()
-    image.src = src
-    const imgWindow = window.open(src)
-    imgWindow.document.write(image.outerHTML)
-  }
 
   const showDrawer = () => {
     setDrawerVisible(true)
@@ -144,12 +128,11 @@ const Collections = ({
                   listType='picture-card'
                   className='avatar-uploader'
                   showUploadList={false}
-                  action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
                   beforeUpload={beforeUpload}
                   onChange={handleChange}
-                  onPreview={onPreview}
+                  customRequest={customRequest}
                 >
-                  {imageUrl ? (
+                  {!isUploading && imageUrl ? (
                     <img
                       src={imageUrl}
                       alt='avatar'

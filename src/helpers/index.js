@@ -7,7 +7,6 @@ export const generateCards = (
   onClickCard
 ) => {
   let cards = []
-  console.log('Collections: ', collections)
   collections.forEach((collection, index) => {
     cards.push(
       <Card
@@ -15,7 +14,7 @@ export const generateCards = (
         owner={collection.owner}
         collectionId={collection.collectionId}
         url={collection.assetUrl}
-        title={collection.title}
+        name={collection.name}
         value={collection.value || 1}
         inAuction={collection.inAuction}
         lastBid={collection.lastBid}

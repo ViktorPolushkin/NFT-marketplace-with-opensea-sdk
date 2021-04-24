@@ -61,15 +61,15 @@ const Header = ({
       <Link to={PATHS.DASHBOARD}>
         <img src={LOGO} alt={'app logo'} height={48} />
       </Link>
-      <div className='expander'></div>
       <Menu
         style={{
+          flexGrow: 1,
+          width: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
           backgroundColor: 'transparent',
           borderBottom: 0,
-          maxWidth: 400,
         }}
         mode='horizontal'
         expandIcon={<MenuOutlined />}

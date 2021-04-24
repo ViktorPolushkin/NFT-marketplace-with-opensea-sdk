@@ -27,53 +27,27 @@ const Collections = ({
   const [hasError, setHasError] = useState('')
   const [imageUrl, setImageUrl] = useState('')
 
-  const isPending = (profile, collection) => {
-    const profileStatus = profile.status
-    const collectionStatus = collection.status
-    return (
-      profileStatus.indexOf(IS_PENDING) > -1 ||
-      collectionStatus.indexOf(IS_PENDING) > -1
-    )
-  }
-
   useEffect(() => {
     setHasError('')
     getCollectionsAction({})
   }, [getCollectionsAction])
 
-  const handleFirebaseUpload = imageFile => {
-    if (!imageFile) {
-      setHasError('File is not an image!, please check strictly')
-      return
+  const customRequest = async ({ onError, onSuccess, file }) => {
+    const metadata = {
+      contentType: 'image/jpeg',
     }
-
-    return new Promise((resolve, reject) => {
-      const uploadTask = storage
-        .ref(`/images/${imageFile.uid}`)
-        .put(imageFile.originFileObj)
-
-      uploadTask.on(
-        'state_changed',
-        snapshot => {
-          console.log(snapshot)
-        },
-        error => {
-          setHasError(error.message)
-          reject()
-        },
-        async () => {
-          const firebaseUrl = await storage
-            .ref('images')
-            .child(imageFile.uid)
-            .getDownloadURL()
-
-          if (firebaseUrl) {
-            setImageUrl(firebaseUrl)
-            resolve(firebaseUrl)
-          }
-        }
-      )
-    })
+    const storageRef = await storage.ref('image')
+    const imageName = file.uid //a unique name for the image
+    const imgFile = storageRef.child(imageName)
+    try {
+      console.log('start_upload')
+      const image = await imgFile.put(file, metadata)
+      setImageUrl(await imgFile.getDownloadURL())
+      onSuccess(null, image)
+    } catch (e) {
+      console.log(e)
+      onError(e)
+    }
   }
 
   const onClickLike = () => {}
@@ -107,27 +81,23 @@ const Collections = ({
   }
 
   const onCreateCollection = imageFile => {
-    let promise = []
-    promise.push(handleFirebaseUpload(imageFile))
-
-    Promise.all(promise).then(data => {
-      createCollectionAction({
-        body: {
-          collectionId: imageFile.uid,
-          assetUrl: data[0],
-          name,
-          bio,
-          fee,
-          creator: profile.payload.walletId,
-          owner: profile.payload.walletId,
-        },
-        onSuccess: getCollectionsAction({}),
-      })
+    createCollectionAction({
+      body: {
+        collectionId: imageFile.uid,
+        assetUrl: imageUrl,
+        name,
+        bio,
+        fee,
+        creator: profile.payload.walletId,
+        owner: profile.payload.walletId,
+      },
+      onSuccess: getCollectionsAction({}),
     })
   }
 
   return (
     <CollectionsComponent
+      imageUrl={imageUrl}
       collections={
         collection.payload && collection.payload.length
           ? collection.payload
@@ -139,7 +109,7 @@ const Collections = ({
       onCreateCollection={onCreateCollection}
       onChangeHandler={onChangeHandler}
       onFeeChangeHandler={onFeeChangeHandler}
-      // isLoading={() => isPending(profile, collection)}
+      customRequest={customRequest}
     />
   )
 }

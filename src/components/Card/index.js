@@ -7,7 +7,7 @@ const Card = ({
   owner,
   collectionId,
   url,
-  title,
+  name,
   value,
   inAuction,
   lastBid,
@@ -34,7 +34,7 @@ const Card = ({
       </div>
       <div className='card-info'>
         <div className='card-info-collection'>
-          <div className='card-info-title'>{title}</div>
+          <div className='card-info-title'>{name}</div>
           <div className='card-info-value'>{`${value} BNB ≈ ${Number(
             rate * value
           ).toFixed(2)} USD`}</div>

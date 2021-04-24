@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { PageHeader, Input, Button, Upload, message } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
@@ -18,19 +18,11 @@ const Profile = ({
   discord,
   onClickHandler,
   onChangeHandler,
+  customRequest,
   onError,
 }) => {
-  const [bannerImage, setBannerImage] = useState('')
-  const [avatarImage, setAvatarImage] = useState('')
-  const [bannerFile, setBannerFile] = useState(null)
-  const [avatarFile, setAvatarFile] = useState(null)
   const [isBannerUploading, setBannerUploading] = useState(false)
   const [isAvatarUploading, setAvatarUploading] = useState(false)
-
-  useEffect(() => {
-    bannerUrl && setBannerImage(bannerUrl)
-    avatarUrl && setAvatarImage(avatarUrl)
-  }, [bannerUrl, avatarUrl])
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader()
@@ -64,31 +56,12 @@ const Profile = ({
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, image => {
         if (isBanner) {
-          setBannerFile(info.file)
-          setBannerImage(image)
           setBannerUploading(false)
         } else {
-          setAvatarFile(info.file)
-          setAvatarImage(image)
           setAvatarUploading(false)
         }
       })
     }
-  }
-
-  const onPreview = async file => {
-    let src = file.url
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file.originFileObj)
-        reader.onload = () => resolve(reader.result)
-      })
-    }
-    const image = new Image()
-    image.src = src
-    const imgWindow = window.open(src)
-    imgWindow.document.write(image.outerHTML)
   }
 
   const uploadBannerButton = (
@@ -136,13 +109,12 @@ const Profile = ({
               listType='picture-card'
               className='avatar-uploader'
               showUploadList={false}
-              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
               beforeUpload={beforeUpload}
               onChange={info => handleChange(info, true)}
-              onPreview={onPreview}
+              customRequest={data => customRequest(data, true)}
             >
-              {!isBannerUploading && bannerImage ? (
-                <img src={bannerImage} alt='avatar' style={{ width: '100%' }} />
+              {!isBannerUploading && bannerUrl ? (
+                <img src={bannerUrl} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadBannerButton
               )}
@@ -157,13 +129,12 @@ const Profile = ({
               listType='picture-card'
               className='avatar-uploader'
               showUploadList={false}
-              action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
               beforeUpload={beforeUpload}
               onChange={handleChange}
-              onPreview={onPreview}
+              customRequest={data => customRequest(data)}
             >
-              {!isAvatarUploading && avatarImage ? (
-                <img src={avatarImage} alt='avatar' style={{ width: '100%' }} />
+              {!isAvatarUploading && avatarUrl ? (
+                <img src={avatarUrl} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadAvatarButton
               )}
@@ -202,11 +173,7 @@ const Profile = ({
           />
         </div>
         <div className='profile-edit-save'>
-          <Button
-            type='primary'
-            loading={isUploading}
-            onClick={() => onClickHandler(bannerFile, avatarFile)}
-          >
+          <Button type='primary' loading={isUploading} onClick={onClickHandler}>
             Save Changes
           </Button>
         </div>

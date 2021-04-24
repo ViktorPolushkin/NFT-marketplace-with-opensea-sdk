@@ -46,87 +46,49 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
     return error
   }
 
-  const handleFirebaseUpload = (imageFile, isBanner = false) => {
-    if (!imageFile) {
-      setHasError('File is not an image!, please check strictly')
-      return
+  const customRequest = async (data, isBanner = false) => {
+    const { onError, onSuccess, file } = data
+    const metadata = {
+      contentType: 'image/jpeg',
     }
+    const storageRef = await storage.ref('image')
+    const imageName = file.uid //a unique name for the image
+    const imgFile = storageRef.child(imageName)
+    try {
+      console.log('start_upload')
+      const image = await imgFile.put(file, metadata)
 
-    return new Promise((resolve, reject) => {
-      const uploadTask = storage
-        .ref(`/images/${imageFile.uid}`)
-        .put(imageFile.originFileObj)
-
-      uploadTask.on(
-        'state_changed',
-        snapshot => {
-          console.log(snapshot)
-        },
-        error => {
-          setHasError(error.message)
-          reject()
-        },
-        async () => {
-          const firebaseUrl = await storage
-            .ref('images')
-            .child(imageFile.uid)
-            .getDownloadURL()
-
-          if (firebaseUrl) {
-            if (isBanner) {
-              setBannerUrl(firebaseUrl)
-              console.log('banner', firebaseUrl)
-              resolve([firebaseUrl, isBanner])
-            } else {
-              setAvatarUrl(firebaseUrl)
-              console.log('avatar', firebaseUrl)
-              resolve([firebaseUrl, isBanner])
-            }
-          }
-        }
-      )
-    })
+      if (isBanner) {
+        setBannerUrl(await imgFile.getDownloadURL())
+      } else {
+        setAvatarUrl(await imgFile.getDownloadURL())
+      }
+      onSuccess(null, image)
+    } catch (e) {
+      console.log(e)
+      onError(e)
+    }
   }
 
-  const onClickHandler = (banner, avatar) => {
+  const onClickHandler = () => {
     setUploading(true)
-    let promises = []
-    promises.push(handleFirebaseUpload(banner, true))
-    promises.push(handleFirebaseUpload(avatar))
 
-    Promise.all(promises).then(datas => {
-      let banner
-      let avatar
-
-      datas.forEach(data => {
-        if (data[1]) {
-          banner = data[0]
-        } else {
-          avatar = data[0]
-        }
-      })
-
-      if (hasError) {
-        return
-      }
-
-      updateProfileAction({
-        body: {
-          bannerUrl: banner,
-          avatarUrl: avatar,
-          nickname,
-          email,
-          bio,
-          website,
-          discord,
-        },
-        onSuccess: () => {
-          setUploading(false)
-        },
-        onFailure: () => {
-          setUploading(false)
-        },
-      })
+    updateProfileAction({
+      body: {
+        bannerUrl,
+        avatarUrl,
+        nickname,
+        email,
+        bio,
+        website,
+        discord,
+      },
+      onSuccess: () => {
+        setUploading(false)
+      },
+      onFailure: () => {
+        setUploading(false)
+      },
     })
   }
 
@@ -168,6 +130,7 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
       discord={discord}
       onClickHandler={onClickHandler}
       onChangeHandler={onChangeHandler}
+      customRequest={customRequest}
       onError={isError}
     />
   )
