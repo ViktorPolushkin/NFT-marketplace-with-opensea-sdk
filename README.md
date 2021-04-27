@@ -1,16 +1,5 @@
 # NFT marketplace demo for Ali
 
-## Let's share our social site accounts here so we can communicate in no matter what.
-   But let's don't mention about this on freelancer.com, if freelancer.com knows about this, they will make our accounts invalid and both of us cannot communicate each other.
-   Let's make some comfort in interaction.
-   
-   I use skype only for now. You can find me with my email.
-   Email: viktor.polushkin2020@gmail.com
-   
-   Please note yours under here. If you have some other social accounts, let me know some, if it is not secret :)
-   
-   
-
 ## Opensea Marketplace Clone Website:
 
 We would like a website that very closely resembles Opensea.
