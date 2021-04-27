@@ -11,7 +11,7 @@
    
    
 
-### Opensea Marketplace Clone Website:
+## Opensea Marketplace Clone Website:
 
 We would like a website that very closely resembles Opensea.
 The SDK will allow almost a perfect copy of Opensea.
