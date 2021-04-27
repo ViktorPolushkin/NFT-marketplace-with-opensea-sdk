@@ -11,9 +11,9 @@ import { IS_PENDING } from 'constants/Constants'
 
 import { storage } from 'configuration/Firebase'
 
-import CollectionsComponent from 'components/Collections'
+import CollectionComponent from 'components/Collection'
 
-const Collections = ({
+const Collection = ({
   collection,
   profile,
   getCollectionsAction,
@@ -23,7 +23,7 @@ const Collections = ({
   const history = useHistory()
   const [name, setName] = useState('')
   const [bio, setBio] = useState('')
-  const [fee, setFee] = useState('')
+  const [fee, setFee] = useState(4)
   const [hasError, setHasError] = useState('')
   const [imageUrl, setImageUrl] = useState('')
 
@@ -43,10 +43,10 @@ const Collections = ({
       console.log('start_upload')
       const image = await imgFile.put(file, metadata)
       setImageUrl(await imgFile.getDownloadURL())
-      onSuccess(null, image)
+      onSuccess && onSuccess(null, image)
     } catch (e) {
       console.log(e)
-      onError(e)
+      onError && onError(e)
     }
   }
 
@@ -96,7 +96,7 @@ const Collections = ({
   }
 
   return (
-    <CollectionsComponent
+    <CollectionComponent
       imageUrl={imageUrl}
       collections={
         collection.payload && collection.payload.length
@@ -124,4 +124,4 @@ const mapDispatchToProps = {
   createCollectionAction,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Collections)
+export default connect(mapStateToProps, mapDispatchToProps)(Collection)

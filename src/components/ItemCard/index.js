@@ -3,7 +3,7 @@ import { LikeOutlined, EyeOutlined } from '@ant-design/icons'
 
 import './style.less'
 
-const Card = ({
+const ItemCard = ({
   owner,
   collectionId,
   url,
@@ -24,27 +24,27 @@ const Card = ({
   }, [onViewCollection])
 
   return (
-    <div className='card' onClick={e => onClickCard(owner, collectionId)}>
-      <div className='card-image'>
+    <div className='item-card' onClick={e => onClickCard(owner, collectionId)}>
+      <div className='item-card-image'>
         {url ? (
           <img src={url} alt='Collection img' width={'100%'} />
         ) : (
           <div>:D IMAGE :P</div>
         )}
       </div>
-      <div className='card-info'>
-        <div className='card-info-collection'>
-          <div className='card-info-title'>{name}</div>
-          <div className='card-info-value'>{`${value} BNB ≈ ${Number(
+      <div className='item-card-info'>
+        <div className='item-card-info-collection'>
+          <div className='item-card-info-title'>{name}</div>
+          <div className='item-card-info-value'>{`${value} BNB ≈ ${Number(
             rate * value
           ).toFixed(2)} USD`}</div>
         </div>
-        <div className='card-info-likes-views'>
-          <div className='card-info-likes' onClick={() => onClickLike()}>
+        <div className='item-card-info-likes-views'>
+          <div className='item-card-info-likes' onClick={() => onClickLike()}>
             {likes}
             <LikeOutlined />
           </div>
-          <div className='card-info-views'>
+          <div className='item-card-info-views'>
             {views}
             <EyeOutlined />
           </div>
@@ -54,4 +54,4 @@ const Card = ({
   )
 }
 
-export default Card
+export default ItemCard

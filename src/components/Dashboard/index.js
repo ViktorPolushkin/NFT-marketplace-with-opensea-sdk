@@ -17,7 +17,7 @@ const Dashboard = () => {
   }
 
   const onClickCreate = () => {
-    history.push(PATHS.COLLECTIONS)
+    history.push(PATHS.COLLECTION)
   }
 
   return (

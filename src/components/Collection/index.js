@@ -14,11 +14,11 @@ import {
   PlusOutlined,
 } from '@ant-design/icons'
 import ImgCrop from 'antd-img-crop'
-import { generateCards } from 'helpers'
+import { generateCollectionCards } from 'helpers'
 
 import './style.less'
 
-const { TextArea } = Input
+const { TextArea, Search } = Input
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader()
@@ -38,11 +38,9 @@ const beforeUpload = file => {
   return isJpgOrPng && isLt2M
 }
 
-const Collections = ({
+const Collection = ({
   imageUrl,
   collections,
-  onViewCollection,
-  onClickLike,
   onClickCard,
   onCreateCollection,
   onChangeHandler,
@@ -83,14 +81,15 @@ const Collections = ({
   }
 
   return (
-    <div className='collections'>
-      <div className='collections-page-header'>
+    <div className='collection'>
+      <div className='collection-page-header'>
         <PageHeader
-          className='collections-page-header-title'
-          title={'Collections'}
+          className='collection-page-header-title'
+          title={'Collection'}
           extra={[
+            <Search key={'collectionSearch'} style={{ width: 'auto' }} />,
             <Button
-              key='collectionAdd'
+              key={'collectionAdd'}
               type='primary'
               icon={<PlusCircleOutlined />}
               onClick={showDrawer}
@@ -100,14 +99,12 @@ const Collections = ({
           ]}
         />
       </div>
-      <div className='collections-assets'>
-        <div className='collections-assets-wrap'>
-          {generateCards(
-            collections,
-            onViewCollection,
-            onClickLike,
-            onClickCard
-          )}
+      <div className='collection-page-comments'>
+        You can create your own collection in here with no gas
+      </div>
+      <div className='collection-assets'>
+        <div className='collection-assets-wrap'>
+          {generateCollectionCards(collections, onClickCard)}
         </div>
       </div>
       <Drawer
@@ -119,9 +116,9 @@ const Collections = ({
         visible={drawerVisible}
         key={'right'}
       >
-        <div className='collections-creator'>
-          <div className='collections-creator-info'>
-            <div className='collections-creator-info-file-reader'>
+        <div className='collection-creator'>
+          <div className='collection-creator-info'>
+            <div className='collection-creator-info-file-reader'>
               <ImgCrop rotate>
                 <Upload
                   name='avatar'
@@ -144,14 +141,14 @@ const Collections = ({
                 </Upload>
               </ImgCrop>
             </div>
-            <div className='collections-creator-info-name'>
+            <div className='collection-creator-info-name'>
               <Input
                 name={'name'}
                 placeholder='Name of new collection'
                 onChange={e => onChangeHandler(e)}
               />
             </div>
-            <div className='collections-creator-info-bio'>
+            <div className='collection-creator-info-bio'>
               <TextArea
                 name={'bio'}
                 placeholder='Provide description for your collection.'
@@ -159,19 +156,20 @@ const Collections = ({
                 onChange={e => onChangeHandler(e)}
               />
             </div>
-            <div className='collections-creator-info-fee'>
+            <div className='collection-creator-info-fee'>
               <InputNumber
                 style={{ width: '100%' }}
                 name={'fee'}
                 min={0}
                 max={10}
                 step={0.01}
-                placeholder={`Fee can't be more than 10`}
-                onChange={value => onFeeChangeHandler(value)}
+                placeholder={`Our site collects 4% of transaction fee`}
+                disabled
+                onChange={value => onFeeChangeHandler(4)}
               />
             </div>
           </div>
-          <div className='collections-creator-buttons'>
+          <div className='collection-creator-buttons'>
             <Button
               // loading={isLoading}
               type='primary'
@@ -187,4 +185,4 @@ const Collections = ({
   )
 }
 
-export default Collections
+export default Collection

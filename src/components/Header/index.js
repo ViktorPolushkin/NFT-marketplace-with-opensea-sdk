@@ -82,7 +82,7 @@ const Header = ({
         </Menu.Item>
         {isAuthenticated && (
           <Menu.Item className='menu-item' key={'collections'}>
-            <Link to={PATHS.COLLECTIONS}>Create</Link>
+            <Link to={PATHS.COLLECTION}>Create</Link>
           </Menu.Item>
         )}
         {isAuthenticated ? (

@@ -11,8 +11,8 @@ const Creators = () => {
       <div className='creators-page-header'>
         <PageHeader className='creators-page-header-title' title={'Creators'} />
       </div>
-      <div className='collections-assets'>
-        <div className='collections-assets-wrap'>
+      <div className='creators-assets'>
+        <div className='creators-assets-wrap'>
           <CreatorCard />
           <CreatorCard />
           <CreatorCard />

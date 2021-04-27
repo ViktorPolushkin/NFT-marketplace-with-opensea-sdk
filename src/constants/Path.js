@@ -2,7 +2,7 @@ const PATHS = {
   DASHBOARD: '/',
   BROWSE_ASSETS: '/assets',
   CREATORS: '/creators',
-  COLLECTIONS: '/collections',
+  COLLECTION: '/collection',
   PROFILE: '/profile',
 }
 

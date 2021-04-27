@@ -12,7 +12,7 @@ const CollectionDetail = ({
   views,
   likes,
 }) => {
-  return <div className='collection-detail'></div>
+  return <div className='collection-detail'>Collection Detail Component</div>
 }
 
 export default CollectionDetail

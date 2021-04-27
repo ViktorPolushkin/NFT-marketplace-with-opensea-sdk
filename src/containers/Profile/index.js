@@ -24,7 +24,7 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
   useEffect(() => {
     setHasError('')
     getProfileAction({})
-  }, [getProfileAction])
+  }, [])
 
   useEffect(() => {
     if (payload) {

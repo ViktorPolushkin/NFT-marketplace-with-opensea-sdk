@@ -1,0 +1,49 @@
+@import '../../styles/vairable.less';
+
+.collection-card {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 0px #0004, 0px 8px 16px -2px #0004;
+
+  &-image {
+    position: relative;
+    padding-top: calc(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    overflow: hidden;
+
+    & > img {
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 0;
+    min-height: 72px;
+    color: #fff;
+    background-color: @card-info-color;
+
+    &-title {
+      font-size: 14px;
+    }
+
+    &-comment {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 2px 0px #000a, 0px 16px 32px -4px #000a;
+  }
+}

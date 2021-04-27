@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageHeader } from 'antd'
-import { generateCards } from 'helpers'
+import { generateItemCards } from 'helpers'
 
 import './style.less'
 
@@ -17,7 +17,7 @@ const Browse = ({
       </div>
       <div className='browse-assets'>
         <div className='browse-assets-wrap'>
-          {generateCards(
+          {generateItemCards(
             collections,
             onViewCollection,
             onClickLike,
