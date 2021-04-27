@@ -1,100 +1,40 @@
-# Use antd in create-react-app ✨
+# NFT marketplace demo for Ali
 
-[Create React App](https://facebook.github.io/create-react-app/) + [Ant Design](https://ant.design).
+## Let's share our social site accounts here so we can communicate in no matter what.
+   But let's don't mention about this on freelancer.com, if freelancer.com knows about this, they will make our accounts invalid and both of us cannot communicate each other.
+   Let's make some comfort in interaction.
+   
+   I use skype only for now. You can find me with my email.
+   Email: viktor.polushkin2020@gmail.com
+   
+   Please note yours under here. If you have some other social accounts, let me know some, if it is not secret :)
+   
+   
 
-## Step by Step Documentation
+### Opensea Marketplace Clone Website:
 
-- 🇺🇸 English: https://ant.design/docs/react/use-with-create-react-app
-- 🇨🇳 中文：https://ant.design/docs/react/use-with-create-react-app-cn
+We would like a website that very closely resembles Opensea.
+The SDK will allow almost a perfect copy of Opensea.
 
-## Preview
+https://github.com/ProjectOpenSea/opensea-js/
 
-```bash
-$ npm install
-$ npm start
-```
+The functions should be very similar and specially we would require:
 
-or:
+-multiple sellers, multiple buyers
+-Account creation using a web3 crypto wallet such as Metamask
+-Sellers should be able to create collections using NFT using ERC-1155 standard- gasless transactions (again Opensea SDK features this tool)
+-Sellers should be able to create and manage their collections like in Opensea.
+-The homepage should have some featured collections from sellers, trending collections and new collections.
+-Users should be able to search using filters such as
+  # Recently Listed
+  # Highest Price
+  # Recently created
+  # Highest Last Sale
+  # Expiring Soon
+  # Oldest
+  # Lowest Price
+  # Most Views
+  
+And finally as we discussed, once a buyer buys the NFT the web3 wallet pays the seller automatically just like Opensea. Payments fully managed by the wallets.
 
-```bash
-$ yarn
-$ yarn start
-```
-
-## See more
-
-- [antd](http://github.com/ant-design/ant-design/)
-- [create-react-app](https://github.com/facebookincubator/create-react-app)
-- [craco](https://github.com/gsoft-inc/craco)
-- [craco-less](https://github.com/DocSpring/craco-less)
-
----
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+About 25 days.
