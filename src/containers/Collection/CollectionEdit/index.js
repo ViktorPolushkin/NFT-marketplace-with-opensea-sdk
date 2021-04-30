@@ -2,21 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { collectionStateSelector, profileStateSelector } from 'redux/selectors'
-import { getCollectionsAction } from 'redux/Reducers/Collection'
+import {
+  getCollectionsAction,
+  updateCollectionsAction,
+} from 'redux/Reducers/Collection'
 
 import { storage } from 'configuration/Firebase'
 
-import CollectionDetailComponent from 'components/CollectionDetail'
+import CollectionEditComponent from 'components/CollectionEdit'
 
-const CollectionDetail = ({
+const CollectionEdit = ({
   match,
   collection,
   profile,
   getCollectionsAction,
+  updateCollectionsAction,
 }) => {
   const profileData = profile.me
   const [currentCollection, setCurrentCollection] = useState({})
+  const [name, setName] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [description, setDescription] = useState('')
 
   useEffect(() => {
     if (profileData) {
@@ -57,21 +63,60 @@ const CollectionDetail = ({
     const target = event.target.name
 
     switch (target) {
+      case 'name':
+        setName(event.target.value)
+        break
+      case 'description':
+        setDescription(event.target.value)
+        break
       default:
         break
     }
   }
 
-  const onCreateHandler = () => {}
+  const onUpdateHandler = () => {
+    const lastCollections = collection.items
+    let newCollections = []
+    lastCollections.forEach(lastOne => {
+      if (lastOne.name !== currentCollection.name) {
+        newCollections.push(lastOne)
+      }
+    })
+
+    // if (imageUrl === '') {
+    //   setImageUrl(currentCollection.url)
+    // }
+
+    // if (name === '') {
+    //   setName(currentCollection.name)
+    // }
+
+    // if (description === '') {
+    //   setDescription(currentCollection.description)
+    // }
+
+    newCollections.push({
+      name: name || currentCollection.name,
+      url: imageUrl || currentCollection.url,
+      description: description || currentCollection.description,
+    })
+
+    console.log(newCollections)
+    updateCollectionsAction({
+      body: {
+        collections: newCollections,
+      },
+      params: profileData.walletId,
+    })
+  }
 
   return (
-    <CollectionDetailComponent
-      bannerUrl={currentCollection.url}
-      name={currentCollection.name}
-      description={currentCollection.description}
-      tokens={[]}
+    <CollectionEditComponent
+      name={name || currentCollection.name}
+      url={imageUrl || currentCollection.url}
+      description={description || currentCollection.description}
       onChange={onChangeHandler}
-      onCreate={onCreateHandler}
+      onUpdate={onUpdateHandler}
       customRequest={customRequest}
     />
   )
@@ -84,6 +129,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   getCollectionsAction,
+  updateCollectionsAction,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollectionDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionEdit)

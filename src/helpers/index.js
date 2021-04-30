@@ -33,17 +33,23 @@ export const generateItemCards = (
   return cards
 }
 
-export const generateCollectionCards = (collections, onClickCard) => {
+export const generateCollectionCards = (
+  collections,
+  onViewCollection,
+  onClickCard,
+  onClickEdit
+) => {
   let cards = []
   collections &&
     collections.forEach((collection, index) => {
       cards.push(
         <CollectionCard
           key={index}
-          owner={collection.owner}
-          url={collection.assetUrl}
           name={collection.name}
+          url={collection.url}
+          onViewCollection={onViewCollection}
           onClickCard={onClickCard}
+          onClickEdit={onClickEdit}
         />
       )
     })

@@ -1,3 +1,38 @@
 .collection-detail {
   width: 100%;
+
+  &-banner {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    &-background {
+      width: 100%;
+      height: 100%;
+    }
+
+    &-name {
+      position: absolute;
+      top: 24px;
+      left: 36px;
+      color: #161c24;
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    &-description {
+      position: absolute;
+      width: 100%;
+      min-width: 180px;
+      padding: 24px 18px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
 }

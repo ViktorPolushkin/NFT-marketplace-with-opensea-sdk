@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { collectionStateSelector, profileStateSelector } from 'redux/selectors'
 import {
   getCollectionsAction,
-  createCollectionAction,
+  updateCollectionsAction,
 } from 'redux/Reducers/Collection'
 import { useHistory } from 'react-router-dom'
 import { IS_PENDING } from 'constants/Constants'
@@ -17,20 +17,26 @@ const Collection = ({
   collection,
   profile,
   getCollectionsAction,
-  createCollectionAction,
+  updateCollectionsAction,
   ...otherProps
 }) => {
   const history = useHistory()
+
+  const profileData = profile.me
+
   const [name, setName] = useState('')
-  const [bio, setBio] = useState('')
-  const [fee, setFee] = useState(4)
+  const [description, setDescription] = useState('')
   const [hasError, setHasError] = useState('')
   const [imageUrl, setImageUrl] = useState('')
 
   useEffect(() => {
     setHasError('')
-    getCollectionsAction({})
-  }, [getCollectionsAction])
+    if (profileData) {
+      getCollectionsAction({
+        params: profileData.walletId,
+      })
+    }
+  }, [getCollectionsAction, profileData])
 
   const customRequest = async ({ onError, onSuccess, file }) => {
     const metadata = {
@@ -54,9 +60,12 @@ const Collection = ({
 
   const onViewCollection = () => {}
 
-  const onClickCard = (owner, collectionId) => {
-    console.log(owner, collectionId)
-    history.push(`${owner}/${collectionId}`)
+  const onClickCard = name => {
+    history.push(`/collection/${name /*.replaceAll(' ', '')*/}/`)
+  }
+
+  const onClickEdit = name => {
+    history.push(`/collection/${name /*.replaceAll(' ', '')*/}/edit`)
   }
 
   const onChangeHandler = event => {
@@ -68,30 +77,22 @@ const Collection = ({
       case 'name':
         setName(event.target.value)
         break
-      case 'bio':
-        setBio(event.target.value)
+      case 'description':
+        setDescription(event.target.value)
         break
       default:
         break
     }
   }
 
-  const onFeeChangeHandler = value => {
-    setFee(value)
-  }
-
-  const onCreateCollection = imageFile => {
-    createCollectionAction({
+  const onCreateCollection = () => {
+    const lastCollections = collection.items
+    lastCollections.push({ name, url: imageUrl, description })
+    updateCollectionsAction({
       body: {
-        collectionId: imageFile.uid,
-        assetUrl: imageUrl,
-        name,
-        bio,
-        fee,
-        creator: profile.payload.walletId,
-        owner: profile.payload.walletId,
+        collections: lastCollections,
       },
-      onSuccess: getCollectionsAction({}),
+      params: profileData.walletId,
     })
   }
 
@@ -99,16 +100,14 @@ const Collection = ({
     <CollectionComponent
       imageUrl={imageUrl}
       collections={
-        collection.payload && collection.payload.length
-          ? collection.payload
-          : []
+        collection.items && collection.items.length ? collection.items : []
       }
       onClickLike={onClickLike}
       onViewCollection={onViewCollection}
       onClickCard={onClickCard}
+      onClickEdit={onClickEdit}
       onCreateCollection={onCreateCollection}
       onChangeHandler={onChangeHandler}
-      onFeeChangeHandler={onFeeChangeHandler}
       customRequest={customRequest}
     />
   )
@@ -121,7 +120,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   getCollectionsAction,
-  createCollectionAction,
+  updateCollectionsAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Collection)

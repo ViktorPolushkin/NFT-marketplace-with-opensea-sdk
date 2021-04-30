@@ -41,13 +41,13 @@ const beforeUpload = file => {
 const Collection = ({
   imageUrl,
   collections,
+  onViewCollection,
   onClickCard,
+  onClickEdit,
   onCreateCollection,
   onChangeHandler,
-  onFeeChangeHandler,
   customRequest,
 }) => {
-  const [imageFile, setImageFile] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
 
@@ -58,8 +58,7 @@ const Collection = ({
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => {
-        setImageFile(info.file)
+      getBase64(info.file.originFileObj, () => {
         setIsUploading(false)
       })
     }
@@ -104,7 +103,12 @@ const Collection = ({
       </div>
       <div className='collection-assets'>
         <div className='collection-assets-wrap'>
-          {generateCollectionCards(collections, onClickCard)}
+          {generateCollectionCards(
+            collections,
+            onViewCollection,
+            onClickCard,
+            onClickEdit
+          )}
         </div>
       </div>
       <Drawer
@@ -150,7 +154,7 @@ const Collection = ({
             </div>
             <div className='collection-creator-info-bio'>
               <TextArea
-                name={'bio'}
+                name={'description'}
                 placeholder='Provide description for your collection.'
                 rows={4}
                 onChange={e => onChangeHandler(e)}
@@ -165,7 +169,6 @@ const Collection = ({
                 step={0.01}
                 placeholder={`Our site collects 4% of transaction fee`}
                 disabled
-                onChange={value => onFeeChangeHandler(4)}
               />
             </div>
           </div>
@@ -173,7 +176,7 @@ const Collection = ({
             <Button
               // loading={isLoading}
               type='primary'
-              onClick={() => onCreateCollection(imageFile)}
+              onClick={onCreateCollection}
             >
               Create collection
             </Button>

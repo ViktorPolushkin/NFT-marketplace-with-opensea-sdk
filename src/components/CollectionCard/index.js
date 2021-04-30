@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
+import { EditFilled, LoadingOutlined } from '@ant-design/icons'
 
 import './style.less'
 
 const CollectionCard = ({
-  owner,
-  collectionId,
   url,
   name,
-  onViewCollection = () => {},
+  onViewCollection,
+  onClickEdit,
   onClickCard,
 }) => {
   useEffect(() => {
@@ -15,18 +15,21 @@ const CollectionCard = ({
   }, [onViewCollection])
 
   return (
-    <div
-      className='collection-card'
-      onClick={e => onClickCard(owner, collectionId)}
-    >
-      <div className='collection-card-image'>
+    <div className='collection-card'>
+      <div className='collection-card-edit' onClick={() => onClickEdit(name)}>
+        <EditFilled />
+      </div>
+      <div className='collection-card-image' onClick={() => onClickCard(name)}>
         {url ? (
           <img src={url} alt='Collection img' width={'100%'} />
         ) : (
-          <div>:D IMAGE :P</div>
+          <div>
+            {/* :D IMAGE :P */}
+            <LoadingOutlined />
+          </div>
         )}
       </div>
-      <div className='collection-card-info'>
+      <div className='collection-card-info' onClick={() => onClickCard(name)}>
         <div className='collection-card-info-title'>Collection Card</div>
         <div className='collection-card-info-comment'>{name}</div>
       </div>
