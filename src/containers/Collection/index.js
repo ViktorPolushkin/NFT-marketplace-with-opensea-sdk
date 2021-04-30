@@ -56,10 +56,6 @@ const Collection = ({
     }
   }
 
-  const onClickLike = () => {}
-
-  const onViewCollection = () => {}
-
   const onClickCard = name => {
     history.push(`/collection/${name /*.replaceAll(' ', '')*/}/`)
   }
@@ -102,8 +98,6 @@ const Collection = ({
       collections={
         collection.items && collection.items.length ? collection.items : []
       }
-      onClickLike={onClickLike}
-      onViewCollection={onViewCollection}
       onClickCard={onClickCard}
       onClickEdit={onClickEdit}
       onCreateCollection={onCreateCollection}

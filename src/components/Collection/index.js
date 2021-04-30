@@ -41,7 +41,6 @@ const beforeUpload = file => {
 const Collection = ({
   imageUrl,
   collections,
-  onViewCollection,
   onClickCard,
   onClickEdit,
   onCreateCollection,
@@ -103,12 +102,7 @@ const Collection = ({
       </div>
       <div className='collection-assets'>
         <div className='collection-assets-wrap'>
-          {generateCollectionCards(
-            collections,
-            onViewCollection,
-            onClickCard,
-            onClickEdit
-          )}
+          {generateCollectionCards(collections, onClickCard, onClickEdit)}
         </div>
       </div>
       <Drawer
@@ -178,7 +172,7 @@ const Collection = ({
               type='primary'
               onClick={onCreateCollection}
             >
-              Create collection
+              Create Collection
             </Button>
             <Button onClick={() => onClose()}>Cancel</Button>
           </div>

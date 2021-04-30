@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { collectionStateSelector, profileStateSelector } from 'redux/selectors'
 import { getCollectionsAction } from 'redux/Reducers/Collection'
+import { useHistory } from 'react-router-dom'
+import { IS_PENDING } from 'constants/Constants'
 
 import { storage } from 'configuration/Firebase'
 
@@ -17,6 +19,8 @@ const CollectionDetail = ({
   const profileData = profile.me
   const [currentCollection, setCurrentCollection] = useState({})
   const [imageUrl, setImageUrl] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
 
   useEffect(() => {
     if (profileData) {
@@ -57,6 +61,12 @@ const CollectionDetail = ({
     const target = event.target.name
 
     switch (target) {
+      case 'name':
+        setName(event.target.value)
+        break
+      case 'description':
+        setDescription(event.target.value)
+        break
       default:
         break
     }
@@ -70,8 +80,9 @@ const CollectionDetail = ({
       name={currentCollection.name}
       description={currentCollection.description}
       tokens={[]}
-      onChange={onChangeHandler}
-      onCreate={onCreateHandler}
+      onChangeHandler={onChangeHandler}
+      onCreateHandler={onCreateHandler}
+      imageUrl={imageUrl}
       customRequest={customRequest}
     />
   )

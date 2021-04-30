@@ -3,9 +3,11 @@ import { PageHeader } from 'antd'
 
 import CreatorCard from 'components/CreatorCard'
 
+import { generateCreatorCards } from 'helpers'
+
 import './style.less'
 
-const Creators = () => {
+const Creators = ({ creators, onClickCard }) => {
   return (
     <div className='creators'>
       <div className='creators-page-header'>
@@ -13,12 +15,7 @@ const Creators = () => {
       </div>
       <div className='creators-assets'>
         <div className='creators-assets-wrap'>
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
+          {generateCreatorCards(creators, onClickCard)}
         </div>
       </div>
     </div>

@@ -20,8 +20,9 @@ const FollowerItem = ({ header, comment }) => (
 const CreatorCard = ({
   avatar = '',
   banner = '',
-  name = 'John Doe',
-  comment = 'Full-stack developer',
+  nickname = 'John Doe',
+  comment = 'Creator',
+  onClickCard,
 }) => (
   <div className='creator-card'>
     <div className='creator-card-image'>
@@ -42,7 +43,7 @@ const CreatorCard = ({
         src={avatar}
         alt='Avatar Mask'
       />
-      <div className='creator-card-info-name'>{name}</div>
+      <div className='creator-card-info-name'>{nickname}</div>
       <div className='creator-card-info-comment'>{comment}</div>
       <div className='creator-card-info-social'>
         <Button shape={'circle'} icon={<FacebookFilled />}></Button>

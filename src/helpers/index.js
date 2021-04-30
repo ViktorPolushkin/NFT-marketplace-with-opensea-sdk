@@ -1,9 +1,10 @@
 import ItemCard from 'components/ItemCard'
 import CollectionCard from 'components/CollectionCard'
+import CreatorCard from 'components/CreatorCard'
 
 export const generateItemCards = (
   collections,
-  onViewCollection,
+  onViewItem,
   onClickLike,
   onClickCard
 ) => {
@@ -23,7 +24,7 @@ export const generateItemCards = (
           rate={collection.rate || 2000}
           views={collection.views}
           likes={collection.likes}
-          onViewCollection={onViewCollection}
+          onViewItem={onViewItem}
           onClickLike={onClickLike}
           onClickCard={onClickCard}
         />
@@ -35,7 +36,6 @@ export const generateItemCards = (
 
 export const generateCollectionCards = (
   collections,
-  onViewCollection,
   onClickCard,
   onClickEdit
 ) => {
@@ -47,9 +47,27 @@ export const generateCollectionCards = (
           key={index}
           name={collection.name}
           url={collection.url}
-          onViewCollection={onViewCollection}
           onClickCard={onClickCard}
           onClickEdit={onClickEdit}
+        />
+      )
+    })
+
+  return cards
+}
+
+export const generateCreatorCards = (creators, onClickCard) => {
+  let cards = []
+  creators &&
+    creators.forEach((creator, index) => {
+      console.log('A Creator', creator)
+      cards.push(
+        <CreatorCard
+          key={index}
+          banner={creator.banner}
+          avatar={creator.avatar}
+          nickname={creator.nickname}
+          onClickCard={onClickCard}
         />
       )
     })
