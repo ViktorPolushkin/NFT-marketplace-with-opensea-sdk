@@ -24,7 +24,7 @@ const CreatorCard = ({
   comment = 'Creator',
   onClickCard,
 }) => (
-  <div className='creator-card'>
+  <div className='creator-card' onClick={() => onClickCard(nickname)}>
     <div className='creator-card-image'>
       <img
         className='creator-card-image-background'

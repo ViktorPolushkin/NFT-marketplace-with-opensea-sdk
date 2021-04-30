@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 
 import CreatorsComponent from 'components/Creators'
 
-const Creators = ({ users, getCreatorsAction, ...otherProps }) => {
+const Creators = ({ match, users, getCreatorsAction, ...otherProps }) => {
   const history = useHistory()
 
   useEffect(() => {

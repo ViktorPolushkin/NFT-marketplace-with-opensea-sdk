@@ -83,12 +83,12 @@ const Profile = ({
         <img
           className='profile-banner-background'
           src={banner}
-          alt='collection_banner_img'
+          alt='profile_banner_img'
         />
         <img
           className='profile-banner-avatar'
           src={avatar}
-          alt='collection_banner_img'
+          alt='profile_banner_img'
         />
         <div className='profile-banner-nickname'>{nickname}</div>
       </div>
