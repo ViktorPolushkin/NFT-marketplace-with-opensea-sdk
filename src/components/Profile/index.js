@@ -31,7 +31,10 @@ const Profile = ({
   }
 
   const beforeUpload = file => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+    const isJpgOrPng =
+      file.type === 'image/jpeg' ||
+      file.type === 'image/png' ||
+      file.type === 'image/gif'
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!')
     }
@@ -116,25 +119,27 @@ const Profile = ({
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Banner Image :</div>
-          <Upload
-            name='avatar'
-            listType='picture-card'
-            className='avatar-uploader'
-            showUploadList={false}
-            beforeUpload={beforeUpload}
-            onChange={info => handleChange(info, true)}
-            customRequest={data => customRequest(data, true)}
-          >
-            {!isBannerUploading && banner ? (
-              <img src={banner} alt='avatar' style={{ width: '100%' }} />
-            ) : (
-              uploadBannerButton
-            )}
-          </Upload>
+          <ImgCrop rotate aspect={16 / 9} grid>
+            <Upload
+              name='avatar'
+              listType='picture-card'
+              className='avatar-uploader'
+              showUploadList={false}
+              beforeUpload={beforeUpload}
+              onChange={info => handleChange(info, true)}
+              customRequest={data => customRequest(data, true)}
+            >
+              {!isBannerUploading && banner ? (
+                <img src={banner} alt='avatar' style={{ width: '100%' }} />
+              ) : (
+                uploadBannerButton
+              )}
+            </Upload>
+          </ImgCrop>
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Avatar Image :</div>
-          <ImgCrop rotate>
+          <ImgCrop rotate grid>
             <Upload
               name='avatar'
               listType='picture-card'

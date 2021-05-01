@@ -83,18 +83,6 @@ const CollectionEdit = ({
       }
     })
 
-    // if (imageUrl === '') {
-    //   setImageUrl(currentCollection.url)
-    // }
-
-    // if (name === '') {
-    //   setName(currentCollection.name)
-    // }
-
-    // if (description === '') {
-    //   setDescription(currentCollection.description)
-    // }
-
     newCollections.push({
       name: name || currentCollection.name,
       url: imageUrl || currentCollection.url,

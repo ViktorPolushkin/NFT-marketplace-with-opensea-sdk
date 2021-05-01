@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons'
 import ImgCrop from 'antd-img-crop'
 import { generateCollectionCards } from 'helpers'
+import SmartWrap from 'components/SmartWrap'
 
 import './style.less'
 
@@ -100,16 +101,14 @@ const Collection = ({
       <div className='collection-page-comments'>
         You can create your own collection in here with no gas
       </div>
-      <div className='collection-assets'>
-        <div className='collection-assets-wrap'>
-          {generateCollectionCards(collections, onClickCard, onClickEdit)}
-        </div>
-      </div>
+      <SmartWrap>
+        {generateCollectionCards(collections, onClickCard, onClickEdit)}
+      </SmartWrap>
       <Drawer
         title='Create new collection'
-        width={400}
+        width={'100%'}
         placement={'right'}
-        closable={false}
+        closable={true}
         onClose={onClose}
         visible={drawerVisible}
         key={'right'}
@@ -117,7 +116,7 @@ const Collection = ({
         <div className='collection-creator'>
           <div className='collection-creator-info'>
             <div className='collection-creator-info-file-reader'>
-              <ImgCrop rotate>
+              <ImgCrop rotate grid>
                 <Upload
                   name='avatar'
                   listType='picture-card'

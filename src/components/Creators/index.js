@@ -1,7 +1,6 @@
 import React from 'react'
 import { PageHeader } from 'antd'
-
-import CreatorCard from 'components/CreatorCard'
+import SmartWrap from 'components/SmartWrap'
 
 import { generateCreatorCards } from 'helpers'
 
@@ -13,11 +12,7 @@ const Creators = ({ creators, onClickCard }) => {
       <div className='creators-page-header'>
         <PageHeader className='creators-page-header-title' title={'Creators'} />
       </div>
-      <div className='creators-assets'>
-        <div className='creators-assets-wrap'>
-          {generateCreatorCards(creators, onClickCard)}
-        </div>
-      </div>
+      <SmartWrap>{generateCreatorCards(creators, onClickCard)}</SmartWrap>
     </div>
   )
 }

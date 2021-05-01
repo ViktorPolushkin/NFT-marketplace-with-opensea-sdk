@@ -1,15 +1,8 @@
 import React, { useState } from 'react'
-import {
-  PageHeader,
-  Button,
-  Drawer,
-  Input,
-  InputNumber,
-  Upload,
-  message,
-} from 'antd'
+import { PageHeader, Button, Drawer, Input, Upload, Modal, message } from 'antd'
 import {
   PlusCircleOutlined,
+  MinusCircleOutlined,
   LoadingOutlined,
   PlusOutlined,
 } from '@ant-design/icons'
@@ -44,11 +37,13 @@ const CollectionDetail = ({
   tokens,
   onChangeHandler,
   onCreateHandler,
+  onDeleteHandler,
   imageUrl,
   customRequest,
 }) => {
   const [isUploading, setIsUploading] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
+  const [isModalVisible, setModalVisible] = useState(false)
 
   const handleChange = info => {
     if (info.file.status === 'uploading') {
@@ -76,6 +71,10 @@ const CollectionDetail = ({
 
   const onClose = () => {
     setDrawerVisible(false)
+  }
+
+  const setConfirmModalVisible = visible => {
+    setModalVisible(visible)
   }
 
   return (
@@ -107,6 +106,14 @@ const CollectionDetail = ({
             >
               Add Item
             </Button>,
+            <Button
+              key={'itemDelete'}
+              type='danger'
+              icon={<MinusCircleOutlined />}
+              onClick={() => setConfirmModalVisible(true)}
+            >
+              Delete Collection
+            </Button>,
           ]}
         />
       </div>
@@ -124,11 +131,29 @@ const CollectionDetail = ({
           }
         </div>
       </div>
+      <Modal
+        title='Are you sure to delete this Collection?'
+        centered
+        visible={isModalVisible}
+        onOk={() => {
+          onDeleteHandler(name)
+          setConfirmModalVisible(false)
+        }}
+        onCancel={() => setConfirmModalVisible(false)}
+        okButtonProps={{ type: 'danger' }}
+      >
+        <p className='collection-detail-deletion-confirm'>
+          To confirm deletion, please input
+          <span>{name}</span>
+          in below input field
+        </p>
+        <Input name='confirm' onChange={e => onChangeHandler(e)} />
+      </Modal>
       <Drawer
         title='Create a new Item'
-        width={400}
+        width={'100%'}
         placement={'right'}
-        closable={false}
+        closable={true}
         onClose={onClose}
         visible={drawerVisible}
         key={'right'}

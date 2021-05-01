@@ -1,7 +1,17 @@
 import React from 'react'
 import { PageHeader } from 'antd'
+import SmartWrap from 'components/SmartWrap'
+
+import { generateCollectionItems } from 'helpers'
 
 import './style.less'
+
+const ProfileDataItem = ({ title, info }) => (
+  <div className='creator-detail-profile-item'>
+    <div className='creator-detail-profile-item-title'>{title}</div>
+    <div className='creator-detail-profile-item-info'>{info}</div>
+  </div>
+)
 
 const CreatorDetail = ({
   walletId,
@@ -32,8 +42,17 @@ const CreatorDetail = ({
     </div>
     <PageHeader className='browse-page-header-title' title={'User Profile'} />
     <div className='creator-detail-profile'>
-      <div className='creator-detail-profile-user'>USER PROFILE</div>
-      <div className='creator-detail-profile-items'>USER ITEMS</div>
+      <div className='creator-detail-profile-user'>
+        <ProfileDataItem title={'Email:'} info={email} />
+        <ProfileDataItem title={'Description:'} info={description} />
+        <ProfileDataItem title={'Website:'} info={`www.${website}.com`} />
+        <ProfileDataItem title={'Discord:'} info={discord} />
+        <ProfileDataItem
+          title={'Collections:'}
+          info={generateCollectionItems(collections)}
+        />
+      </div>
+      <div className='creator-detail-profile-items'></div>
     </div>
   </div>
 )

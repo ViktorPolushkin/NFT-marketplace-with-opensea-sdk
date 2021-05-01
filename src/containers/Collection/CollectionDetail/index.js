@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { collectionStateSelector, profileStateSelector } from 'redux/selectors'
-import { getCollectionsAction } from 'redux/Reducers/Collection'
+import {
+  getCollectionsAction,
+  updateCollectionsAction,
+} from 'redux/Reducers/Collection'
 import { useHistory } from 'react-router-dom'
 import { IS_PENDING } from 'constants/Constants'
 
@@ -15,12 +18,16 @@ const CollectionDetail = ({
   collection,
   profile,
   getCollectionsAction,
+  updateCollectionsAction,
 }) => {
+  const history = useHistory()
+
   const profileData = profile.me
   const [currentCollection, setCurrentCollection] = useState({})
   const [imageUrl, setImageUrl] = useState('')
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [confirm, setConfirm] = useState('')
 
   useEffect(() => {
     if (profileData) {
@@ -67,12 +74,38 @@ const CollectionDetail = ({
       case 'description':
         setDescription(event.target.value)
         break
+      case 'confirm':
+        setConfirm(event.target.value)
+        break
       default:
         break
     }
   }
 
   const onCreateHandler = () => {}
+
+  const onDeleteHandler = name => {
+    if (name === confirm) {
+      const lastCollections = collection.items
+      let newCollections = []
+      lastCollections.forEach(lastOne => {
+        if (lastOne.name !== currentCollection.name) {
+          newCollections.push(lastOne)
+        }
+      })
+
+      console.log(newCollections)
+      updateCollectionsAction({
+        body: {
+          collections: newCollections,
+        },
+        params: profileData.walletId,
+        onSuccess: () => {
+          history.push('/collection')
+        },
+      })
+    }
+  }
 
   return (
     <CollectionDetailComponent
@@ -82,6 +115,7 @@ const CollectionDetail = ({
       tokens={[]}
       onChangeHandler={onChangeHandler}
       onCreateHandler={onCreateHandler}
+      onDeleteHandler={onDeleteHandler}
       imageUrl={imageUrl}
       customRequest={customRequest}
     />
@@ -95,6 +129,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   getCollectionsAction,
+  updateCollectionsAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionDetail)
