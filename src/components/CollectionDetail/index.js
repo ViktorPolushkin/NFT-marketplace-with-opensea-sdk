@@ -6,7 +6,7 @@ import {
   LoadingOutlined,
   PlusOutlined,
 } from '@ant-design/icons'
-import { generateItemCards } from 'helpers'
+import { generateTokenCards } from 'helpers'
 
 import './style.less'
 
@@ -35,6 +35,7 @@ const CollectionDetail = ({
   name,
   description,
   tokens,
+  rate,
   onChangeHandler,
   onCreateHandler,
   onDeleteHandler,
@@ -123,8 +124,9 @@ const CollectionDetail = ({
       <div className='item-assets'>
         <div className='item-assets-wrap'>
           {
-            generateItemCards()
-            // collections,
+            generateTokenCards()
+            // tokens,
+            // rate,
             // onViewCollection,
             // onClickCard,
             // onClickEdit

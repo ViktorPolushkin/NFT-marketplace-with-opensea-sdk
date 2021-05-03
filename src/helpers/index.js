@@ -1,29 +1,31 @@
-import ItemCard from 'components/ItemCard'
+import TokenCard from 'components/TokenCard'
 import CollectionCard from 'components/CollectionCard'
 import CreatorCard from 'components/CreatorCard'
 import CollectionItemCard from 'components/CollectionItemCard'
 
-export const generateItemCards = (
-  collections,
+export const generateTokenCards = (
+  tokens,
+  rate,
   onViewItem,
   onClickLike,
-  onClickCard
+  onClickCard,
+  onClickEdit
 ) =>
-  collections &&
-  collections.map((collection, index) => (
-    <ItemCard
+  tokens &&
+  tokens.map((token, index) => (
+    <TokenCard
       key={index}
-      owner={collection.owner}
-      collectionId={collection.collectionId}
-      url={collection.assetUrl}
-      name={collection.name}
-      value={collection.value || 1}
-      inAuction={collection.inAuction}
-      lastBid={collection.lastBid}
-      rate={collection.rate || 2000}
-      views={collection.views}
-      likes={collection.likes}
+      collectionId={token.collectionId}
+      id={token.id}
+      url={token.detail.url}
+      name={token.detail.name}
+      prise={token.detail.prise}
+      rate={rate}
+      likes={token.meta.likes}
+      views={token.meta.views}
+      inAuction={token.auction.inAuction}
       onViewItem={onViewItem}
+      onClickEdit={onClickEdit}
       onClickLike={onClickLike}
       onClickCard={onClickCard}
     />
@@ -45,6 +47,16 @@ export const generateCollectionCards = (
     />
   ))
 
+export const generateCollectionItems = collections =>
+  collections &&
+  collections.map((collection, index) => (
+    <CollectionItemCard
+      key={index}
+      url={collection.url}
+      name={collection.name}
+    />
+  ))
+
 export const generateCreatorCards = (creators, onClickCard) =>
   creators &&
   creators.map((creator, index) => (
@@ -54,15 +66,5 @@ export const generateCreatorCards = (creators, onClickCard) =>
       avatar={creator.avatar}
       nickname={creator.nickname}
       onClickCard={onClickCard}
-    />
-  ))
-
-export const generateCollectionItems = collections =>
-  collections &&
-  collections.map((collection, index) => (
-    <CollectionItemCard
-      key={index}
-      url={collection.url}
-      name={collection.name}
     />
   ))

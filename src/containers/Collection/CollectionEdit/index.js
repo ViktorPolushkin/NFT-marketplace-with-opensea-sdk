@@ -89,7 +89,6 @@ const CollectionEdit = ({
       description: description || currentCollection.description,
     })
 
-    console.log(newCollections)
     updateCollectionsAction({
       body: {
         collections: newCollections,
