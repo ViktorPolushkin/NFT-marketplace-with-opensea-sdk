@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -20,8 +20,9 @@ const Header = ({
   ...otherProps
 }) => {
   const { ethereum } = window
-  const { payload } = profile
   const { status, token, error } = auth
+
+  const profileData = profile.me
 
   const [waitingWallet, setWaitingWallet] = useState(false)
 
@@ -106,9 +107,9 @@ const Header = ({
 
   return (
     <HeaderComponent
-      avatar={payload ? payload.avatarUrl : false}
-      nickname={payload ? payload.nickname : 'Person'}
-      walletId={payload ? payload.walletId : ''}
+      avatar={profileData ? profileData.avatar : false}
+      nickname={profileData ? profileData.nickname : 'Anonymous'}
+      walletId={profileData ? profileData.walletId : ''}
       isPending={isPending(status) || waitingWallet}
       isAuthenticated={isAuthenticated()}
       isError={isError()}

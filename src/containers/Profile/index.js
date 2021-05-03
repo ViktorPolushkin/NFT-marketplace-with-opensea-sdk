@@ -10,40 +10,41 @@ import { storage } from 'configuration/Firebase'
 import ProfileComponent from 'components/Profile'
 
 const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
-  const { status, payload, error } = profile
   const [hasError, setHasError] = useState('')
   const [isUploading, setUploading] = useState(false)
-  const [bannerUrl, setBannerUrl] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [banner, setBanner] = useState('')
+  const [avatar, setAvatar] = useState('')
   const [nickname, setNickname] = useState('')
   const [email, setEmail] = useState('')
-  const [bio, setBio] = useState('')
+  const [description, setDescription] = useState('')
   const [website, setWebsite] = useState('')
   const [discord, setDiscord] = useState('')
 
   useEffect(() => {
     setHasError('')
     getProfileAction({})
-  }, [])
+  }, [getProfileAction])
 
   useEffect(() => {
-    if (payload) {
-      setBannerUrl(payload.bannerUrl)
-      setAvatarUrl(payload.avatarUrl)
-      setNickname(payload.nickname)
-      setEmail(payload.email)
-      setBio(payload.bio)
-      setWebsite(payload.website)
-      setDiscord(payload.discord)
+    const profileData = profile.me
+    if (profileData) {
+      setBanner(profileData.banner)
+      setAvatar(profileData.avatar)
+      setNickname(profileData.nickname)
+      setEmail(profileData.email)
+      setDescription(profileData.description)
+      setWebsite(profileData.website)
+      setDiscord(profileData.discord)
     }
-  }, [payload])
+  }, [profile.me])
 
-  const isPending = status => {
+  const isPending = profile => {
+    const { status } = profile
     return status.indexOf(IS_PENDING) > -1
   }
 
   const isError = () => {
-    return error
+    return profile.error
   }
 
   const customRequest = async (data, isBanner = false) => {
@@ -59,9 +60,9 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
       const image = await imgFile.put(file, metadata)
 
       if (isBanner) {
-        setBannerUrl(await imgFile.getDownloadURL())
+        setBanner(await imgFile.getDownloadURL())
       } else {
-        setAvatarUrl(await imgFile.getDownloadURL())
+        setAvatar(await imgFile.getDownloadURL())
       }
       onSuccess(null, image)
     } catch (e) {
@@ -75,11 +76,11 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
 
     updateProfileAction({
       body: {
-        bannerUrl,
-        avatarUrl,
+        banner,
+        avatar,
         nickname,
         email,
-        bio,
+        description,
         website,
         discord,
       },
@@ -104,8 +105,8 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
       case 'email':
         setEmail(event.target.value)
         break
-      case 'bio':
-        setBio(event.target.value)
+      case 'description':
+        setDescription(event.target.value)
         break
       case 'website':
         setWebsite(event.target.value)
@@ -120,12 +121,12 @@ const Profile = ({ profile, getProfileAction, updateProfileAction }) => {
 
   return (
     <ProfileComponent
-      isUploading={isUploading || isPending(status)}
-      bannerUrl={bannerUrl}
-      avatarUrl={avatarUrl}
+      isUploading={isUploading || isPending(profile)}
+      banner={banner}
+      avatar={avatar}
       nickname={nickname}
       email={email}
-      bio={bio}
+      description={description}
       website={website}
       discord={discord}
       onClickHandler={onClickHandler}

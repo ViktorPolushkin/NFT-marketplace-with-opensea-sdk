@@ -9,11 +9,11 @@ const { TextArea } = Input
 
 const Profile = ({
   isUploading = true,
-  bannerUrl,
-  avatarUrl,
+  banner,
+  avatar,
   nickname,
   email,
-  bio,
+  description,
   website,
   discord,
   onClickHandler,
@@ -31,7 +31,10 @@ const Profile = ({
   }
 
   const beforeUpload = file => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+    const isJpgOrPng =
+      file.type === 'image/jpeg' ||
+      file.type === 'image/png' ||
+      file.type === 'image/gif'
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!')
     }
@@ -79,6 +82,19 @@ const Profile = ({
 
   return (
     <div className='profile'>
+      <div className='profile-banner'>
+        <img
+          className='profile-banner-background'
+          src={banner}
+          alt='profile_banner_img'
+        />
+        <img
+          className='profile-banner-avatar'
+          src={avatar}
+          alt='profile_banner_img'
+        />
+        <div className='profile-banner-nickname'>{nickname}</div>
+      </div>
       <PageHeader className='profile-edit-header' title={'Edit your profile'} />
       <div className='profile-edit'>
         <div className='profile-edit-field'>
@@ -103,7 +119,7 @@ const Profile = ({
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Banner Image :</div>
-          <ImgCrop rotate>
+          <ImgCrop rotate aspect={16 / 9} grid>
             <Upload
               name='avatar'
               listType='picture-card'
@@ -113,8 +129,8 @@ const Profile = ({
               onChange={info => handleChange(info, true)}
               customRequest={data => customRequest(data, true)}
             >
-              {!isBannerUploading && bannerUrl ? (
-                <img src={bannerUrl} alt='avatar' style={{ width: '100%' }} />
+              {!isBannerUploading && banner ? (
+                <img src={banner} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadBannerButton
               )}
@@ -123,7 +139,7 @@ const Profile = ({
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Avatar Image :</div>
-          <ImgCrop rotate>
+          <ImgCrop rotate grid>
             <Upload
               name='avatar'
               listType='picture-card'
@@ -133,8 +149,8 @@ const Profile = ({
               onChange={handleChange}
               customRequest={data => customRequest(data)}
             >
-              {!isAvatarUploading && avatarUrl ? (
-                <img src={avatarUrl} alt='avatar' style={{ width: '100%' }} />
+              {!isAvatarUploading && avatar ? (
+                <img src={avatar} alt='avatar' style={{ width: '100%' }} />
               ) : (
                 uploadAvatarButton
               )}
@@ -142,13 +158,13 @@ const Profile = ({
           </ImgCrop>
         </div>
         <div className='profile-edit-field'>
-          <div className='profile-edit-title'>Bio :</div>
+          <div className='profile-edit-title'>Description :</div>
           <TextArea
-            name={'bio'}
+            name={'description'}
             rows={4}
             placeholder={'Please note about you shortly. (Max 300 characters)'}
             maxLength={300}
-            value={bio}
+            value={description}
             onChange={e => onChangeHandler(e)}
           />
         </div>

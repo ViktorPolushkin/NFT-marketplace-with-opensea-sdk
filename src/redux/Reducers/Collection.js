@@ -8,23 +8,17 @@ import {
 
 import {
   DO_REQUEST_COLLECTIONS,
-  DO_CREATE_COLLECTION,
-  DO_READ_COLLECTION,
-  DO_UPDATE_COLLECTION,
-  DO_DELETE_COLLECTION,
+  DO_UPDATE_COLLECTIONS,
 } from 'constants/Constants'
 
 const getInitialState = () => ({
   status: 'init_state',
-  payload: null,
+  items: null,
   error: null,
 })
 
 export const getCollectionsAction = createAction(DO_REQUEST_COLLECTIONS)
-export const createCollectionAction = createAction(DO_CREATE_COLLECTION)
-export const readCollectionAction = createAction(DO_READ_COLLECTION)
-export const updateCollectionAction = createAction(DO_UPDATE_COLLECTION)
-export const deleteCollectionAction = createAction(DO_DELETE_COLLECTION)
+export const updateCollectionsAction = createAction(DO_UPDATE_COLLECTIONS)
 
 export default handleActions(
   {
@@ -35,77 +29,29 @@ export default handleActions(
     [requestSuccess(DO_REQUEST_COLLECTIONS)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_REQUEST_COLLECTIONS),
-      payload,
+      items: payload,
       error: null,
     }),
     [requestFail(DO_REQUEST_COLLECTIONS)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_REQUEST_COLLECTIONS),
-      payload: null,
+      items: [],
       error: payload,
     }),
-    [requestPending(DO_CREATE_COLLECTION)]: state => ({
+    [requestPending(DO_UPDATE_COLLECTIONS)]: state => ({
       ...state,
-      status: requestPending(DO_CREATE_COLLECTION),
+      status: requestPending(DO_UPDATE_COLLECTIONS),
     }),
-    [requestSuccess(DO_CREATE_COLLECTION)]: (state, { payload }) => ({
+    [requestSuccess(DO_UPDATE_COLLECTIONS)]: (state, { payload }) => ({
       ...state,
-      status: requestSuccess(DO_CREATE_COLLECTION),
-      payload,
+      status: requestSuccess(DO_UPDATE_COLLECTIONS),
+      items: payload,
       error: null,
     }),
-    [requestFail(DO_CREATE_COLLECTION)]: (state, { payload }) => ({
+    [requestFail(DO_UPDATE_COLLECTIONS)]: (state, { payload }) => ({
       ...state,
-      status: requestFail(DO_CREATE_COLLECTION),
-      payload: null,
-      error: payload,
-    }),
-    [requestPending(DO_READ_COLLECTION)]: state => ({
-      ...state,
-      status: requestPending(DO_READ_COLLECTION),
-    }),
-    [requestSuccess(DO_READ_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestSuccess(DO_READ_COLLECTION),
-      payload,
-      error: null,
-    }),
-    [requestFail(DO_READ_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestFail(DO_READ_COLLECTION),
-      payload: null,
-      error: payload,
-    }),
-    [requestPending(DO_UPDATE_COLLECTION)]: state => ({
-      ...state,
-      status: requestPending(DO_UPDATE_COLLECTION),
-    }),
-    [requestSuccess(DO_UPDATE_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestSuccess(DO_UPDATE_COLLECTION),
-      payload,
-      error: null,
-    }),
-    [requestFail(DO_UPDATE_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestFail(DO_UPDATE_COLLECTION),
-      payload: null,
-      error: payload,
-    }),
-    [requestPending(DO_DELETE_COLLECTION)]: state => ({
-      ...state,
-      status: requestPending(DO_DELETE_COLLECTION),
-    }),
-    [requestSuccess(DO_DELETE_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestSuccess(DO_DELETE_COLLECTION),
-      payload,
-      error: null,
-    }),
-    [requestFail(DO_DELETE_COLLECTION)]: (state, { payload }) => ({
-      ...state,
-      status: requestFail(DO_DELETE_COLLECTION),
-      payload: null,
+      status: requestFail(DO_UPDATE_COLLECTIONS),
+      items: [],
       error: payload,
     }),
   },

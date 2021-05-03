@@ -1,26 +1,18 @@
 import React from 'react'
 import { PageHeader } from 'antd'
+import SmartWrap from 'components/SmartWrap'
 
-import CreatorCard from 'components/CreatorCard'
+import { generateCreatorCards } from 'helpers'
 
 import './style.less'
 
-const Creators = () => {
+const Creators = ({ creators, onClickCard }) => {
   return (
     <div className='creators'>
       <div className='creators-page-header'>
         <PageHeader className='creators-page-header-title' title={'Creators'} />
       </div>
-      <div className='creators-assets'>
-        <div className='creators-assets-wrap'>
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-          <CreatorCard />
-        </div>
-      </div>
+      <SmartWrap>{generateCreatorCards(creators, onClickCard)}</SmartWrap>
     </div>
   )
 }

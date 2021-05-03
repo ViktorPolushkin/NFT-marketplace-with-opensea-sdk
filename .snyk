@@ -1,0 +1,8 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.19.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - web3-react > @0x/subproviders > eth-lightwallet > bitcore-mnemonic > bitcore-lib > lodash:
+        patched: '2021-05-03T22:47:21.073Z'
