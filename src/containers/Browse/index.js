@@ -18,27 +18,27 @@ const Browse = ({ token, getTokensAction, ...otherProps }) => {
   }, [getTokensAction])
 
   const dummyToken = [
-    {
-      collectionId: 'testCollection',
-      id: 'testId',
-      detail: {
-        url: 'testUrl',
-        name: 'testName',
-        prise: 1,
-      },
-      meta: {
-        likes: 0,
-        views: 0,
-      },
-      auction: {
-        inAuction: false,
-      },
-    },
+    // {
+    //   collectionId: 'testCollection',
+    //   id: 'testId',
+    //   detail: {
+    //     url: 'testUrl',
+    //     name: 'testName',
+    //     prise: 1,
+    //   },
+    //   meta: {
+    //     likes: 0,
+    //     views: 0,
+    //   },
+    //   auction: {
+    //     inAuction: false,
+    //   },
+    // },
   ]
 
-  const onClickLike = () => {}
+  const onClickLike = () => { }
 
-  const onViewItem = () => {}
+  const onViewItem = () => { }
 
   const onClickCard = (collectionId, id) => {
     history.push(`${PATHS.COLLECTION}/${collectionId}/${id}`)
@@ -54,13 +54,13 @@ const Browse = ({ token, getTokensAction, ...otherProps }) => {
 
   return (
     <BrowseComponent
-      tokens={/*token.content || */ dummyToken}
-      rate={rate}
-      onViewItem={onViewItem}
-      onClickLike={onClickLike}
-      onClickCard={onClickCard}
-      onEmptyCreate={onEmptyCreate}
-      onClickEdit={onClickEdit}
+      tokens={/*token.content || */ dummyToken }
+      rate={ rate }
+      onViewItem={ onViewItem }
+      onClickLike={ onClickLike }
+      onClickCard={ onClickCard }
+      onEmptyCreate={ onEmptyCreate }
+      onClickEdit={ onClickEdit }
     />
   )
 }

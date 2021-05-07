@@ -20,7 +20,7 @@ const TokenEdit = ({ match, token, getTokenAction, updateTokenAction }) => {
     getTokenAction({
       params: tokenId,
       onSuccess: payload => {
-        setTokenDetail(payload.detail)
+        setTokenDetail(payload.data.detail)
       },
     })
   }, [getTokenAction, tokenId])
@@ -73,14 +73,16 @@ const TokenEdit = ({ match, token, getTokenAction, updateTokenAction }) => {
     })
   }
 
+  console.log(tokenDetail);
+
   return (
     <TokenEditComponent
-      name={name || tokenDetail.name}
-      url={imageUrl || tokenDetail.url}
-      description={description || tokenDetail.description}
-      onChange={onChangeHandler}
-      onUpdate={onUpdateHandler}
-      customRequest={customRequest}
+      name={ name || tokenDetail.name }
+      url={ imageUrl || tokenDetail.url }
+      description={ description || tokenDetail.description }
+      onChange={ onChangeHandler }
+      onUpdate={ onUpdateHandler }
+      customRequest={ customRequest }
     />
   )
 }

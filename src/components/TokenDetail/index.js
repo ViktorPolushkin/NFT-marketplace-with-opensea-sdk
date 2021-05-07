@@ -51,13 +51,13 @@ const transactionColumns = [
     title: 'From',
     dataIndex: 'from',
     key: 'prise',
-    render: text => <a href=''>{text}</a>,
+    render: text => <a href=''>{ text }</a>,
   },
   {
     title: 'To',
     dataIndex: 'to',
     key: 'to',
-    render: text => <a href=''>{text}</a>,
+    render: text => <a href=''>{ text }</a>,
   },
   {
     title: 'Date',
@@ -92,40 +92,42 @@ const TokenDetail = ({ token }) => {
     <div className='token-detail'>
       <PageHeader
         className='token-detail-header-title'
-        title={'Token information'}
-        extra={[
+        title={ 'Token information' }
+        extra={ [
           !listed && (
-            <Button key='primary' type={'primary'}>
+            <Button key='primary' type={ 'primary' }>
               Sell Item
             </Button>
           ),
-        ]}
+        ] }
       />
       <div className='token-detail-wrapper'>
         <div className='token-detail-wrap'>
           <div className='token-detail-summary'>
             <div className='token-detail-summary-media'>
               <div className='token-detail-summary-image'>
-                <img src={url} alt='token_image' />
+                <div className='token-detail-summary-image-wrap'>
+                  <img src={ url } alt='token_image' />
+                </div>
               </div>
               <div className='token-detail-summary-bar'>
                 <div>
                   <EyeOutlined />
-                  {parseInt(views)}
+                  { parseInt(views) }
                 </div>
                 <div>
                   <LikeOutlined />
-                  {parseInt(likes)}
+                  { parseInt(likes) }
                 </div>
               </div>
             </div>
             <div className='token-detail-summary-properties'>
               <Collapse
-                defaultActiveKey={['creator']}
-                expandIconPosition={'right'}
-                expandIcon={({ isActive }) => (
-                  <CaretRightOutlined rotate={isActive ? 90 : 0} />
-                )}
+                defaultActiveKey={ ['creator'] }
+                expandIconPosition={ 'right' }
+                expandIcon={ ({ isActive }) => (
+                  <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
+                ) }
                 className='token-detail-summary-properties-collapse'
               >
                 <Panel
@@ -140,9 +142,9 @@ const TokenDetail = ({ token }) => {
                 >
                   <div>
                     <span>Created by </span>
-                    <a>{`${creator.slice(0, 4)}...${creator.slice(
+                    <a href="">{ `${creator.slice(0, 4)}...${creator.slice(
                       creator.length - 3
-                    )}`}</a>
+                    )}` }</a>
                   </div>
                 </Panel>
                 <Panel
@@ -155,7 +157,7 @@ const TokenDetail = ({ token }) => {
                   }
                   key='description'
                 >
-                  <div>{description}</div>
+                  <div>{ description }</div>
                 </Panel>
                 <Panel
                   className='token-detail-summary-properties-panel'
@@ -171,22 +173,22 @@ const TokenDetail = ({ token }) => {
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Contract Address</div>
                       <a
-                        href={`https://etherscan.io/address/${address}`}
+                        href={ `https://etherscan.io/address/${address}` }
                         target='_blank'
                         rel='noreferrer'
                       >
-                        {`${address.slice(0, 4)} ... ${address.slice(
+                        { `${address.slice(0, 4)} ... ${address.slice(
                           address.length - 3
-                        )}`}
+                        )}` }
                       </a>
                     </div>
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Token Id</div>
-                      <div>{`${id.slice(0, 16)}...`}</div>
+                      <div>{ `${id.slice(0, 16)}...` }</div>
                     </div>
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Chain info</div>
-                      <div>{type}</div>
+                      <div>{ type }</div>
                     </div>
                   </div>
                 </Panel>
@@ -195,23 +197,25 @@ const TokenDetail = ({ token }) => {
           </div>
           <div className='token-detail-main'>
             <div className='token-detail-main-wrap'>
-              <a href={'/collection.'} className='token-detail-main-collection'>
-                {collectionId}
+              <a href={ `/collection/${collectionId}` } className='token-detail-main-collection'>
+                { collectionId }
               </a>
-              <div className='token-detail-main-name'>{name}</div>
+              <div className='token-detail-main-name'>
+                { name }
+              </div>
               <div className='token-detail-main-owner'>
-                Owned by{' '}
-                <a href>{`${owner.slice(0, 4)}...${owner.slice(
+                Owned by{ ' ' }
+                <a href="">{ `${owner.slice(0, 4)}...${owner.slice(
                   owner.length - 3
-                )}`}</a>
+                )}` }</a>
               </div>
               <div className='token-detail-main-offers'>
                 <Collapse
-                  defaultActiveKey={['priseHistory']}
-                  expandIconPosition={'right'}
-                  expandIcon={({ isActive }) => (
-                    <CaretRightOutlined rotate={isActive ? 90 : 0} />
-                  )}
+                  defaultActiveKey={ ['priseHistory'] }
+                  expandIconPosition={ 'right' }
+                  expandIcon={ ({ isActive }) => (
+                    <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
+                  ) }
                   className='token-detail-history-collapse'
                 >
                   <Panel
@@ -224,8 +228,8 @@ const TokenDetail = ({ token }) => {
                     }
                     key='priseHistory'
                   >
-                    <div style={{ width: '100%', height: 240 }}>
-                      <Chart chartConfigs={chartConfigs} />
+                    <div style={ { width: '100%', height: 240 } }>
+                      <Chart chartConfigs={ chartConfigs } />
                     </div>
                   </Panel>
                   <Panel
@@ -238,7 +242,7 @@ const TokenDetail = ({ token }) => {
                     }
                     key='transactionHistory'
                   >
-                    <Table columns={offerColumns} />
+                    <Table columns={ offerColumns } />
                   </Panel>
                 </Collapse>
               </div>
@@ -248,11 +252,11 @@ const TokenDetail = ({ token }) => {
         <div className='token-detail-history'>
           <div className='token-detail-history-wrap'>
             <Collapse
-              defaultActiveKey={['history']}
-              expandIconPosition={'right'}
-              expandIcon={({ isActive }) => (
-                <CaretRightOutlined rotate={isActive ? 90 : 0} />
-              )}
+              defaultActiveKey={ ['history'] }
+              expandIconPosition={ 'right' }
+              expandIcon={ ({ isActive }) => (
+                <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
+              ) }
               className='token-detail-history-collapse'
             >
               <Panel
@@ -265,7 +269,7 @@ const TokenDetail = ({ token }) => {
                 }
                 key='history'
               >
-                <Table columns={transactionColumns} />
+                <Table columns={ transactionColumns } />
               </Panel>
             </Collapse>
           </div>

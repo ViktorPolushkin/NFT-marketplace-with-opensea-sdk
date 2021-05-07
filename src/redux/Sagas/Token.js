@@ -4,6 +4,7 @@ import apiCaller from 'redux/ApiCaller'
 
 import {
   DO_REQUEST_TOKENS,
+  DO_REQUEST_TOKENS_BY_COLLECTION_ID,
   DO_CREATE_TOKEN,
   DO_UPDATE_TOKEN,
   DO_REQUEST_TOKEN,
@@ -22,10 +23,16 @@ const doRequestTokens = apiCaller({
   path: '/token/',
 })
 
+const doRequestTokensByCollectionId = apiCaller({
+  type: DO_REQUEST_TOKENS_BY_COLLECTION_ID,
+  method: 'put',
+  path: '/token/',
+})
+
 const doCreateToken = apiCaller({
   type: DO_CREATE_TOKEN,
   method: 'post',
-  path: ({ payload }) => `/token/${payload.params}`,
+  path: '/token/',
 })
 
 const doUpdateToken = apiCaller({
@@ -78,6 +85,7 @@ const doUpdateTokenLikes = apiCaller({
 
 export default function* rootSaga() {
   yield takeLatest(DO_REQUEST_TOKENS, doRequestTokens)
+  yield takeLatest(DO_REQUEST_TOKENS_BY_COLLECTION_ID, doRequestTokensByCollectionId)
   yield takeLatest(DO_CREATE_TOKEN, doCreateToken)
   yield takeLatest(DO_UPDATE_TOKEN, doUpdateToken)
   yield takeLatest(DO_REQUEST_TOKEN, doRequestToken)

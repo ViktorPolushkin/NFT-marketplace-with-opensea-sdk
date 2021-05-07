@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { tokenStateSelector, userStateSelector } from 'redux/selectors'
+import { tokenStateSelector } from 'redux/selectors'
 import { getTokenAction, updateTokenAction } from 'redux/Reducers/Token'
 
 import TokenDetailComponent from 'components/TokenDetail'
@@ -10,11 +10,14 @@ import TEST from 'resources/background.jpg'
 
 const TokenDetail = ({ match, token, getTokenAction }) => {
   const { tokenId } = match.params
-  const tokenContent = token.content
+  const [tokenDetail, setTokenDetail] = useState({})
 
   useEffect(() => {
     getTokenAction({
       params: tokenId,
+      onSuccess: payload => {
+        setTokenDetail(payload.data)
+      },
     })
   }, [getTokenAction, tokenId])
 
@@ -38,7 +41,8 @@ const TokenDetail = ({ match, token, getTokenAction }) => {
     },
   }
 
-  return <TokenDetailComponent token={testToken} />
+  console.log(tokenDetail);
+  return <TokenDetailComponent token={ tokenDetail.id ? tokenDetail : testToken } />
 }
 
 const mapStateToProps = createStructuredSelector({

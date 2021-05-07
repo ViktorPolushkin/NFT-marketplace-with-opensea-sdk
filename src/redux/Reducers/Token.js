@@ -8,6 +8,7 @@ import {
 
 import {
   DO_REQUEST_TOKENS,
+  DO_REQUEST_TOKENS_BY_COLLECTION_ID,
   DO_CREATE_TOKEN,
   DO_UPDATE_TOKEN,
   DO_REQUEST_TOKEN,
@@ -27,6 +28,7 @@ const getInitialState = () => ({
 })
 
 export const getTokensAction = createAction(DO_REQUEST_TOKENS)
+export const getTokensActionByCollectionId = createAction(DO_REQUEST_TOKENS_BY_COLLECTION_ID)
 export const createTokenAction = createAction(DO_CREATE_TOKEN)
 export const updateTokenAction = createAction(DO_UPDATE_TOKEN)
 export const getTokenAction = createAction(DO_REQUEST_TOKEN)
@@ -56,6 +58,22 @@ export default handleActions(
       content: [],
       error: payload,
     }),
+    [requestPending(DO_REQUEST_TOKENS_BY_COLLECTION_ID)]: state => ({
+      ...state,
+      status: requestPending(DO_REQUEST_TOKENS_BY_COLLECTION_ID),
+    }),
+    [requestSuccess(DO_REQUEST_TOKENS_BY_COLLECTION_ID)]: (state, { payload }) => ({
+      ...state,
+      status: requestSuccess(DO_REQUEST_TOKENS_BY_COLLECTION_ID),
+      content: payload,
+      error: null,
+    }),
+    [requestFail(DO_REQUEST_TOKENS_BY_COLLECTION_ID)]: (state, { payload }) => ({
+      ...state,
+      status: requestFail(DO_REQUEST_TOKENS_BY_COLLECTION_ID),
+      content: [],
+      error: payload,
+    }),
     [requestPending(DO_CREATE_TOKEN)]: state => ({
       ...state,
       status: requestPending(DO_CREATE_TOKEN),
@@ -63,13 +81,13 @@ export default handleActions(
     [requestSuccess(DO_CREATE_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_CREATE_TOKEN),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_CREATE_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_CREATE_TOKEN),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_UPDATE_TOKEN)]: state => ({
@@ -79,13 +97,13 @@ export default handleActions(
     [requestSuccess(DO_UPDATE_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_UPDATE_TOKEN),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_UPDATE_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_UPDATE_TOKEN),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_REQUEST_TOKEN)]: state => ({
@@ -95,13 +113,13 @@ export default handleActions(
     [requestSuccess(DO_REQUEST_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_REQUEST_TOKEN),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_REQUEST_TOKEN)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_REQUEST_TOKEN),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_REQUEST_AUCTION_TOKENS)]: state => ({
@@ -127,13 +145,13 @@ export default handleActions(
     [requestSuccess(DO_REQUEST_TOKEN_OFFERS)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_REQUEST_TOKEN_OFFERS),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_REQUEST_TOKEN_OFFERS)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_REQUEST_TOKEN_OFFERS),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_UPDATE_TOKEN_OFFERS)]: state => ({
@@ -143,13 +161,13 @@ export default handleActions(
     [requestSuccess(DO_UPDATE_TOKEN_OFFERS)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_UPDATE_TOKEN_OFFERS),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_UPDATE_TOKEN_OFFERS)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_UPDATE_TOKEN_OFFERS),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_REQUEST_TOKEN_VIEWS)]: state => ({
@@ -159,13 +177,13 @@ export default handleActions(
     [requestSuccess(DO_REQUEST_TOKEN_VIEWS)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_REQUEST_TOKEN_VIEWS),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_REQUEST_TOKEN_VIEWS)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_REQUEST_TOKEN_VIEWS),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_UPDATE_TOKEN_VIEWS)]: state => ({
@@ -175,13 +193,13 @@ export default handleActions(
     [requestSuccess(DO_UPDATE_TOKEN_VIEWS)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_UPDATE_TOKEN_VIEWS),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_UPDATE_TOKEN_VIEWS)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_UPDATE_TOKEN_VIEWS),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_REQUEST_TOKEN_LIKES)]: state => ({
@@ -191,13 +209,13 @@ export default handleActions(
     [requestSuccess(DO_REQUEST_TOKEN_LIKES)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_REQUEST_TOKEN_LIKES),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_REQUEST_TOKEN_LIKES)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_REQUEST_TOKEN_LIKES),
-      content: {},
+      content: [{}],
       error: payload,
     }),
     [requestPending(DO_UPDATE_TOKEN_LIKES)]: state => ({
@@ -207,13 +225,13 @@ export default handleActions(
     [requestSuccess(DO_UPDATE_TOKEN_LIKES)]: (state, { payload }) => ({
       ...state,
       status: requestSuccess(DO_UPDATE_TOKEN_LIKES),
-      content: payload,
+      content: [payload],
       error: null,
     }),
     [requestFail(DO_UPDATE_TOKEN_LIKES)]: (state, { payload }) => ({
       ...state,
       status: requestFail(DO_UPDATE_TOKEN_LIKES),
-      content: {},
+      content: [{}],
       error: payload,
     }),
   },

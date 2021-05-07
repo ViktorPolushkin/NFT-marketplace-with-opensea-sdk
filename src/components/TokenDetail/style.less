@@ -57,13 +57,24 @@
     &-image {
       position: relative;
       padding-top: calc(100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
 
-      & > img {
+      &-wrap {
         position: absolute;
+        top: 0;
         width: 100%;
         height: 100%;
-        top: 0;
-        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & > img {
+          width: 100%;
+          background-color: #000;
+        }
       }
     }
 

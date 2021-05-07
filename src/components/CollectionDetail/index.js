@@ -41,6 +41,8 @@ const CollectionDetail = ({
   onDeleteHandler,
   imageUrl,
   customRequest,
+  onClickEdit,
+  onClickCard
 }) => {
   const [isUploading, setIsUploading] = useState(false)
   const [drawerVisible, setDrawerVisible] = useState(false)
@@ -61,8 +63,8 @@ const CollectionDetail = ({
 
   const uploadButton = (
     <div>
-      {isUploading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload Photo</div>
+      {isUploading ? <LoadingOutlined /> : <PlusOutlined /> }
+      <div style={ { marginTop: 8 } }>Upload Photo</div>
     </div>
   )
 
@@ -83,39 +85,39 @@ const CollectionDetail = ({
       <div className='collection-detail-banner'>
         <img
           className='collection-detail-banner-background'
-          src={bannerUrl}
+          src={ bannerUrl }
           alt='collection_banner_img'
         />
         <div className='collection-detail-banner-name'>
-          {name}
+          { name }
           <div className='collection-detail-banner-description'>
-            {description}
+            { description }
           </div>
         </div>
       </div>
       <div className='collection-detail-header'>
         <PageHeader
           className='collection-detail-header-title'
-          title={'Items'}
-          extra={[
-            <Search key={'itemSearch'} style={{ width: 'auto' }} />,
+          title={ 'Items' }
+          extra={ [
+            <Search key={ 'itemSearch' } style={ { width: 'auto' } } />,
             <Button
-              key={'itemAdd'}
+              key={ 'itemAdd' }
               type='primary'
-              icon={<PlusCircleOutlined />}
-              onClick={showDrawer}
+              icon={ <PlusCircleOutlined /> }
+              onClick={ showDrawer }
             >
               Add Item
             </Button>,
             <Button
-              key={'itemDelete'}
+              key={ 'itemDelete' }
               type='danger'
-              icon={<MinusCircleOutlined />}
-              onClick={() => setConfirmModalVisible(true)}
+              icon={ <MinusCircleOutlined /> }
+              onClick={ () => setConfirmModalVisible(true) }
             >
               Delete Collection
             </Button>,
-          ]}
+          ] }
         />
       </div>
       <div className='collection-detail-comments'>
@@ -124,41 +126,43 @@ const CollectionDetail = ({
       <div className='item-assets'>
         <div className='item-assets-wrap'>
           {
-            generateTokenCards()
-            // tokens,
-            // rate,
-            // onViewCollection,
-            // onClickCard,
-            // onClickEdit
+            generateTokenCards(
+              tokens,
+              rate,
+              onClickEdit,
+              onClickCard,
+              () => { },
+              () => { }
+            )
           }
         </div>
       </div>
       <Modal
         title='Are you sure to delete this Collection?'
         centered
-        visible={isModalVisible}
-        onOk={() => {
+        visible={ isModalVisible }
+        onOk={ () => {
           onDeleteHandler(name)
           setConfirmModalVisible(false)
-        }}
-        onCancel={() => setConfirmModalVisible(false)}
-        okButtonProps={{ type: 'danger' }}
+        } }
+        onCancel={ () => setConfirmModalVisible(false) }
+        okButtonProps={ { type: 'danger' } }
       >
         <p className='collection-detail-deletion-confirm'>
           To confirm deletion, please input
-          <span>{name}</span>
+          <span>{ name }</span>
           in below input field
         </p>
-        <Input name='confirm' onChange={e => onChangeHandler(e)} />
+        <Input name='confirm' onChange={ e => onChangeHandler(e) } />
       </Modal>
       <Drawer
         title='Create a new Item'
-        width={'100%'}
-        placement={'right'}
-        closable={true}
-        onClose={onClose}
-        visible={drawerVisible}
-        key={'right'}
+        width={ '100%' }
+        placement={ 'right' }
+        closable={ true }
+        onClose={ onClose }
+        visible={ drawerVisible }
+        key={ 'right' }
       >
         <div className='item-creator'>
           <div className='item-creator-info'>
@@ -167,46 +171,46 @@ const CollectionDetail = ({
                 name='avatar'
                 listType='picture-card'
                 className='avatar-uploader'
-                showUploadList={false}
-                beforeUpload={beforeUpload}
-                onChange={handleChange}
-                customRequest={customRequest}
+                showUploadList={ false }
+                beforeUpload={ beforeUpload }
+                onChange={ handleChange }
+                customRequest={ customRequest }
               >
-                {!isUploading && imageUrl ? (
-                  <img src={imageUrl} alt='avatar' style={{ width: '100%' }} />
+                { !isUploading && imageUrl ? (
+                  <img src={ imageUrl } alt='avatar' style={ { width: '100%' } } />
                 ) : (
                   uploadButton
-                )}
+                ) }
               </Upload>
             </div>
             <div className='item-creator-info-name'>
               <Input
-                name={'name'}
+                name={ 'name' }
                 placeholder='Name of new item'
-                onChange={e => onChangeHandler(e)}
+                onChange={ e => onChangeHandler(e) }
               />
             </div>
             <div className='item-creator-info-bio'>
               <TextArea
-                name={'description'}
+                name={ 'description' }
                 placeholder='Provide description for your item.'
-                rows={4}
-                onChange={e => onChangeHandler(e)}
+                rows={ 4 }
+                onChange={ e => onChangeHandler(e) }
               />
             </div>
             <div className='item-creator-info-fee'>
-              {'Our site collects 4% of transaction fee'}
+              { 'Our site collects 4% of transaction fee' }
             </div>
           </div>
           <div className='item-creator-buttons'>
             <Button
               // loading={isLoading}
               type='primary'
-              onClick={onCreateHandler}
+              onClick={ onCreateHandler }
             >
               Create Item
             </Button>
-            <Button onClick={() => onClose()}>Cancel</Button>
+            <Button onClick={ () => onClose() }>Cancel</Button>
           </div>
         </div>
       </Drawer>

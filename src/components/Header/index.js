@@ -11,20 +11,20 @@ import {
 
 import PATHS from 'constants/Path'
 
-import LOGO from 'resources/logo_single.svg'
+import LOGO from 'constants/Logo'
 
 import './style.less'
 
 const PopoverHeader = ({ avatar, nickname, walletId }) => (
   <div className='pop-over'>
     <div className='pop-over-info'>
-      <div className='pop-over-info-name'>{nickname}</div>
-      <div className='pop-over-info-walletId'>{walletId}</div>
+      <div className='pop-over-info-name'>{ nickname }</div>
+      <div className='pop-over-info-walletId'>{ walletId }</div>
     </div>
     <Avatar
-      size={'large'}
-      src={avatar}
-      icon={!avatar && <UserOutlined />}
+      size={ 'large' }
+      src={ avatar }
+      icon={ !avatar && <UserOutlined /> }
     ></Avatar>
   </div>
 )
@@ -46,11 +46,11 @@ const Header = ({
 }) => {
   const PopoverMenu = () => (
     <div className='pop-over-body-wrap'>
-      <Link to={PATHS.PROFILE}>
+      <Link to={ PATHS.PROFILE }>
         <ProfileFilled />
         <span>Profile</span>
       </Link>
-      <Button icon={<LogoutOutlined />} onClick={() => logoutHandler()}>
+      <Button icon={ <LogoutOutlined /> } onClick={ () => logoutHandler() }>
         Logout
       </Button>
     </div>
@@ -58,11 +58,11 @@ const Header = ({
 
   return (
     <header className='header'>
-      <Link to={PATHS.DASHBOARD}>
-        <img src={LOGO} alt={'app logo'} height={48} />
+      <Link to={ PATHS.DASHBOARD }>
+        <img src={ LOGO } alt={ 'app logo' } width={ 32 } height={ 36 } />
       </Link>
       <Menu
-        style={{
+        style={ {
           flexGrow: 1,
           width: '100%',
           display: 'flex',
@@ -70,61 +70,61 @@ const Header = ({
           justifyContent: 'flex-end',
           backgroundColor: 'transparent',
           borderBottom: 0,
-        }}
+        } }
         mode='horizontal'
-        expandIcon={<MenuOutlined />}
+        expandIcon={ <MenuOutlined /> }
       >
-        <Menu.Item className='menu-item' key={'assets'}>
-          <Link to={PATHS.BROWSE_ASSETS}>Browse</Link>
+        <Menu.Item className='menu-item' key={ 'assets' }>
+          <Link to={ PATHS.BROWSE_ASSETS }>Browse</Link>
         </Menu.Item>
-        <Menu.Item className='menu-item' key={'creators'}>
-          <Link to={PATHS.CREATORS}>Creators</Link>
+        <Menu.Item className='menu-item' key={ 'creators' }>
+          <Link to={ PATHS.CREATORS }>Creators</Link>
         </Menu.Item>
-        {isAuthenticated && (
-          <Menu.Item className='menu-item' key={'collections'}>
-            <Link to={PATHS.COLLECTION}>Create</Link>
+        { isAuthenticated && (
+          <Menu.Item className='menu-item' key={ 'collections' }>
+            <Link to={ PATHS.COLLECTION }>Create</Link>
           </Menu.Item>
-        )}
-        {isAuthenticated ? (
-          <Menu.Item className='menu-item' key={'account'}>
+        ) }
+        { isAuthenticated ? (
+          <Menu.Item className='menu-item' key={ 'account' }>
             <Popover
-              placement={'bottomLeft'}
+              placement={ 'bottomLeft' }
               title={
                 <PopoverHeader
-                  avatar={avatar}
-                  nickname={nickname}
-                  walletId={`${walletId.slice(0, 4)} ... ${walletId.slice(
+                  avatar={ avatar }
+                  nickname={ nickname }
+                  walletId={ `${walletId.slice(0, 4)} ... ${walletId.slice(
                     walletId.length - 3
-                  )}`}
+                  )}` }
                 />
               }
-              content={<PopoverMenu />}
+              content={ <PopoverMenu /> }
               trigger='click'
             >
-              <a href={'/'} onClick={e => ignoreHref(e)}>
+              <a href={ '/' } onClick={ e => ignoreHref(e) }>
                 Account
               </a>
             </Popover>
           </Menu.Item>
         ) : isPending ? (
-          <Menu.Item className='menu-item' key={'account'}>
+          <Menu.Item className='menu-item' key={ 'account' }>
             <LoadingOutlined />
           </Menu.Item>
         ) : (
           <Menu.Item
             className='menu-item'
-            key={'account'}
-            onClick={() => loginHandler()}
+            key={ 'account' }
+            onClick={ () => loginHandler() }
           >
             <a
-              href={'/'}
+              href={ '/' }
               className='connect-wallet'
-              onClick={e => ignoreHref(e)}
+              onClick={ e => ignoreHref(e) }
             >
               Connect Wallet
             </a>
           </Menu.Item>
-        )}
+        ) }
       </Menu>
     </header>
   )

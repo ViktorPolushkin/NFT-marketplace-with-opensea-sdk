@@ -1,4 +1,6 @@
-import { APP } from 'configuration'
+import { APP, MARKETPLACE_TOTAL_FEE } from 'configuration'
+
+export const APP_FEE = MARKETPLACE_TOTAL_FEE
 
 // * APP NAME CONSTANT
 export const APP_NAME = APP || 'SITE_STORAGE'
@@ -28,6 +30,7 @@ export const DO_UPDATE_USER = 'DO_UPDATE_USER'
 
 // * TOKEN CONSTANTS
 export const DO_REQUEST_TOKENS = 'DO_REQUEST_TOKENS'
+export const DO_REQUEST_TOKENS_BY_COLLECTION_ID = 'DO_REQUEST_TOKENS_BY_COLLECTION_ID'
 export const DO_CREATE_TOKEN = 'DO_CREATE_TOKEN'
 export const DO_UPDATE_TOKEN = 'DO_UPDATE_TOKEN'
 export const DO_REQUEST_TOKEN = 'DO_REQUEST_TOKEN'
