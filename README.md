@@ -1,20 +1,18 @@
-# NFT marketplace demo for Ali
+# FOCUS market || Photograpy NFT marketplace
 
-## Opensea Marketplace Clone Website:
+### Features of marketplace
 
-We would like a website that very closely resembles Opensea.
-The SDK will allow almost a perfect copy of Opensea.
+#### - Multiple sellers, multiple buyers
+We are going to use BEP-1155 so create semi-fungible tokens as gas-free and implement multiple sellers, multiple buyers.
 
-https://github.com/ProjectOpenSea/opensea-js/
+#### - Site has it's own 👍, new 😍 ideas for transaction fee
+Transaction fee is %4. %2 for owners, %2 for focus token holders.
 
-The functions should be very similar and specially we would require:
+#### - Other features are smiliar to Opensea.
 
-#### -multiple sellers, multiple buyers
-#### -Account creation using a web3 crypto wallet such as Metamask
-#### -Sellers should be able to create collections using NFT using ERC-1155 standard- gasless transactions (again Opensea SDK features this tool)
-#### -Sellers should be able to create and manage their collections like in Opensea.
-#### -The homepage should have some featured collections from sellers, trending collections and new collections.
-#### -Users should be able to search using filters such as
+#### - Creators, trending collections, new collections are going to be in Dashboard.
+
+#### - Filters such as
   * Recently Listed
   * Highest Price
   * Recently created
@@ -23,7 +21,9 @@ The functions should be very similar and specially we would require:
   * Oldest
   * Lowest Price
   * Most Views
-  
-And finally as we discussed, once a buyer buys the NFT the web3 wallet pays the seller automatically just like Opensea. Payments fully managed by the wallets.
 
-About 25 days.
+##### At here you can check our progress.
+https://nft-server-demo.herokuapp.com/
+It's in developement and beta version is coming soon.
+
+Thanks for your interesting. Let's make this to Ultra! 🤣😁
