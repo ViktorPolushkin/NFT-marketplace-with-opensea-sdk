@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { PageHeader, Button, Collapse, Table } from 'antd'
 import {
   CaretRightOutlined,
@@ -51,13 +52,13 @@ const transactionColumns = [
     title: 'From',
     dataIndex: 'from',
     key: 'prise',
-    render: text => <a href=''>{ text }</a>,
+    render: text => <Link to={ '' }>{ text }</Link>,
   },
   {
     title: 'To',
     dataIndex: 'to',
     key: 'to',
-    render: text => <a href=''>{ text }</a>,
+    render: text => <Link to={ '' }>{ text }</Link>,
   },
   {
     title: 'Date',
@@ -142,9 +143,9 @@ const TokenDetail = ({ token }) => {
                 >
                   <div>
                     <span>Created by </span>
-                    <a href="">{ `${creator.slice(0, 4)}...${creator.slice(
+                    <Link to={ '' }>{ `${creator.slice(0, 4)}...${creator.slice(
                       creator.length - 3
-                    )}` }</a>
+                    )}` }</Link>
                   </div>
                 </Panel>
                 <Panel
@@ -197,17 +198,17 @@ const TokenDetail = ({ token }) => {
           </div>
           <div className='token-detail-main'>
             <div className='token-detail-main-wrap'>
-              <a href={ `/collection/${collectionId}` } className='token-detail-main-collection'>
+              <Link to={ `/collection/${collectionId}` } className='token-detail-main-collection'>
                 { collectionId }
-              </a>
+              </Link>
               <div className='token-detail-main-name'>
                 { name }
               </div>
               <div className='token-detail-main-owner'>
                 Owned by{ ' ' }
-                <a href="">{ `${owner.slice(0, 4)}...${owner.slice(
+                <Link to={ "" }>{ `${owner.slice(0, 4)}...${owner.slice(
                   owner.length - 3
-                )}` }</a>
+                )}` }</Link>
               </div>
               <div className='token-detail-main-offers'>
                 <Collapse

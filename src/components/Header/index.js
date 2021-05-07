@@ -101,9 +101,9 @@ const Header = ({
               content={ <PopoverMenu /> }
               trigger='click'
             >
-              <a href={ '/' } onClick={ e => ignoreHref(e) }>
+              <Link to={ '/' } onClick={ e => ignoreHref(e) }>
                 Account
-              </a>
+              </Link>
             </Popover>
           </Menu.Item>
         ) : isPending ? (
@@ -116,13 +116,13 @@ const Header = ({
             key={ 'account' }
             onClick={ () => loginHandler() }
           >
-            <a
-              href={ '/' }
+            <Link
+              to={ '/' }
               className='connect-wallet'
               onClick={ e => ignoreHref(e) }
             >
               Connect Wallet
-            </a>
+            </Link>
           </Menu.Item>
         ) }
       </Menu>
