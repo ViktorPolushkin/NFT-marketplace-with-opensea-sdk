@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { tokenStateSelector } from 'redux/selectors'
 import { getTokenAction, updateTokenAction } from 'redux/Reducers/Token'
+import { useHistory } from 'react-router-dom'
+
+import PATHS from 'constants/Path'
 
 import TokenDetailComponent from 'components/TokenDetail'
 
-import TEST from 'resources/background.jpg'
-
 const TokenDetail = ({ match, token, getTokenAction }) => {
+  const history = useHistory()
+
   const { tokenId } = match.params
   const [tokenDetail, setTokenDetail] = useState({})
 
@@ -22,27 +25,35 @@ const TokenDetail = ({ match, token, getTokenAction }) => {
   }, [getTokenAction, tokenId])
 
   const testToken = {
-    collectionId: 'testCollection',
-    id: '5663766592345673562435234523452345',
-    address: '0xA7482C9c5926E88d85804A969c383730Ce100639',
-    type: 'Ethereum',
+    collectionId: '',
+    id: '',
+    address: '',
+    type: '',
     detail: {
-      url: TEST,
-      name: 'testToken',
-      description: 'test token information description',
-      creator: '0x234l2k3423n4l2i342l3k4nl2i3n42f',
-      owner: '0xqb230492304j2039v0s90f9w3234234',
+      url: null,
+      name: '',
+      description: '',
+      creator: '',
+      owner: '',
       listed: false,
     },
     offer: [],
     meta: {
-      views: '2',
-      likes: '1',
+      views: '',
+      likes: '',
     },
   }
 
-  console.log(tokenDetail);
-  return <TokenDetailComponent token={ tokenDetail.id ? tokenDetail : testToken } />
+  const onSellToken = (collectionId, id) => {
+    history.push(`${PATHS.COLLECTION}/${collectionId}/${id}/sell`)
+  }
+
+  return (
+    <TokenDetailComponent
+      token={tokenDetail.id ? tokenDetail : testToken}
+      onSellToken={onSellToken}
+    />
+  )
 }
 
 const mapStateToProps = createStructuredSelector({

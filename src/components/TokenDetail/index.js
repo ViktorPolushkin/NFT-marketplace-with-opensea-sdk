@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { PageHeader, Button, Collapse, Table } from 'antd'
+import { PageHeader, Button, Collapse, Table, Image, Empty } from 'antd'
 import {
   CaretRightOutlined,
   CopyrightOutlined,
@@ -52,13 +52,13 @@ const transactionColumns = [
     title: 'From',
     dataIndex: 'from',
     key: 'prise',
-    render: text => <Link to={ '' }>{ text }</Link>,
+    render: text => <Link to={''}>{text}</Link>,
   },
   {
     title: 'To',
     dataIndex: 'to',
     key: 'to',
-    render: text => <Link to={ '' }>{ text }</Link>,
+    render: text => <Link to={''}>{text}</Link>,
   },
   {
     title: 'Date',
@@ -67,7 +67,7 @@ const transactionColumns = [
   },
 ]
 
-const TokenDetail = ({ token }) => {
+const TokenDetail = ({ token, onSellToken }) => {
   const {
     collectionId,
     id,
@@ -93,14 +93,19 @@ const TokenDetail = ({ token }) => {
     <div className='token-detail'>
       <PageHeader
         className='token-detail-header-title'
-        title={ 'Token information' }
-        extra={ [
+        title={'Token information'}
+        extra={[
           !listed && (
-            <Button key='primary' type={ 'primary' }>
+            <Button
+              key='primary'
+              type={'primary'}
+              shape={'round'}
+              onClick={() => onSellToken(collectionId, id)}
+            >
               Sell Item
             </Button>
           ),
-        ] }
+        ]}
       />
       <div className='token-detail-wrapper'>
         <div className='token-detail-wrap'>
@@ -108,27 +113,31 @@ const TokenDetail = ({ token }) => {
             <div className='token-detail-summary-media'>
               <div className='token-detail-summary-image'>
                 <div className='token-detail-summary-image-wrap'>
-                  <img src={ url } alt='token_image' />
+                  {url ? (
+                    <Image src={url} alt='token_image' preview={{ url }} />
+                  ) : (
+                    <span style={{ color: '#fff8' }}>No Image</span>
+                  )}
                 </div>
               </div>
               <div className='token-detail-summary-bar'>
                 <div>
                   <EyeOutlined />
-                  { parseInt(views) }
+                  {parseInt(views)}
                 </div>
                 <div>
                   <LikeOutlined />
-                  { parseInt(likes) }
+                  {parseInt(likes)}
                 </div>
               </div>
             </div>
             <div className='token-detail-summary-properties'>
               <Collapse
-                defaultActiveKey={ ['creator'] }
-                expandIconPosition={ 'right' }
-                expandIcon={ ({ isActive }) => (
-                  <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
-                ) }
+                defaultActiveKey={['creator']}
+                expandIconPosition={'right'}
+                expandIcon={({ isActive }) => (
+                  <CaretRightOutlined rotate={isActive ? 90 : 0} />
+                )}
                 className='token-detail-summary-properties-collapse'
               >
                 <Panel
@@ -143,9 +152,9 @@ const TokenDetail = ({ token }) => {
                 >
                   <div>
                     <span>Created by </span>
-                    <Link to={ '' }>{ `${creator.slice(0, 4)}...${creator.slice(
+                    <Link to={''}>{`${creator.slice(0, 4)}...${creator.slice(
                       creator.length - 3
-                    )}` }</Link>
+                    )}`}</Link>
                   </div>
                 </Panel>
                 <Panel
@@ -158,7 +167,7 @@ const TokenDetail = ({ token }) => {
                   }
                   key='description'
                 >
-                  <div>{ description }</div>
+                  <div>{description}</div>
                 </Panel>
                 <Panel
                   className='token-detail-summary-properties-panel'
@@ -174,22 +183,22 @@ const TokenDetail = ({ token }) => {
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Contract Address</div>
                       <a
-                        href={ `https://etherscan.io/address/${address}` }
+                        href={`https://etherscan.io/address/${address}`}
                         target='_blank'
                         rel='noreferrer'
                       >
-                        { `${address.slice(0, 4)} ... ${address.slice(
+                        {`${address.slice(0, 4)} ... ${address.slice(
                           address.length - 3
-                        )}` }
+                        )}`}
                       </a>
                     </div>
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Token Id</div>
-                      <div>{ `${id.slice(0, 16)}...` }</div>
+                      <div>{`${id.slice(0, 16)}...`}</div>
                     </div>
                     <div className='token-detail-summary-properties-content-item'>
                       <div>Chain info</div>
-                      <div>{ type }</div>
+                      <div>{type}</div>
                     </div>
                   </div>
                 </Panel>
@@ -198,25 +207,26 @@ const TokenDetail = ({ token }) => {
           </div>
           <div className='token-detail-main'>
             <div className='token-detail-main-wrap'>
-              <Link to={ `/collection/${collectionId}` } className='token-detail-main-collection'>
-                { collectionId }
+              <Link
+                to={`/collection/${collectionId}`}
+                className='token-detail-main-collection'
+              >
+                {collectionId}
               </Link>
-              <div className='token-detail-main-name'>
-                { name }
-              </div>
+              <div className='token-detail-main-name'>{name}</div>
               <div className='token-detail-main-owner'>
-                Owned by{ ' ' }
-                <Link to={ "" }>{ `${owner.slice(0, 4)}...${owner.slice(
+                Owned by{' '}
+                <Link to={''}>{`${owner.slice(0, 4)}...${owner.slice(
                   owner.length - 3
-                )}` }</Link>
+                )}`}</Link>
               </div>
               <div className='token-detail-main-offers'>
                 <Collapse
-                  defaultActiveKey={ ['priseHistory'] }
-                  expandIconPosition={ 'right' }
-                  expandIcon={ ({ isActive }) => (
-                    <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
-                  ) }
+                  defaultActiveKey={['priseHistory']}
+                  expandIconPosition={'right'}
+                  expandIcon={({ isActive }) => (
+                    <CaretRightOutlined rotate={isActive ? 90 : 0} />
+                  )}
                   className='token-detail-history-collapse'
                 >
                   <Panel
@@ -229,8 +239,8 @@ const TokenDetail = ({ token }) => {
                     }
                     key='priseHistory'
                   >
-                    <div style={ { width: '100%', height: 240 } }>
-                      <Chart chartConfigs={ chartConfigs } />
+                    <div style={{ width: '100%', height: 240 }}>
+                      <Chart chartConfigs={chartConfigs} />
                     </div>
                   </Panel>
                   <Panel
@@ -243,7 +253,7 @@ const TokenDetail = ({ token }) => {
                     }
                     key='transactionHistory'
                   >
-                    <Table columns={ offerColumns } />
+                    <Table columns={offerColumns} />
                   </Panel>
                 </Collapse>
               </div>
@@ -253,11 +263,11 @@ const TokenDetail = ({ token }) => {
         <div className='token-detail-history'>
           <div className='token-detail-history-wrap'>
             <Collapse
-              defaultActiveKey={ ['history'] }
-              expandIconPosition={ 'right' }
-              expandIcon={ ({ isActive }) => (
-                <CaretRightOutlined rotate={ isActive ? 90 : 0 } />
-              ) }
+              defaultActiveKey={['history']}
+              expandIconPosition={'right'}
+              expandIcon={({ isActive }) => (
+                <CaretRightOutlined rotate={isActive ? 90 : 0} />
+              )}
               className='token-detail-history-collapse'
             >
               <Panel
@@ -270,7 +280,7 @@ const TokenDetail = ({ token }) => {
                 }
                 key='history'
               >
-                <Table columns={ transactionColumns } />
+                <Table columns={transactionColumns} />
               </Panel>
             </Collapse>
           </div>

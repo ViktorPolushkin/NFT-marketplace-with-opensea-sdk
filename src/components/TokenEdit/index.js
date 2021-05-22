@@ -89,7 +89,7 @@ const TokenEdit = ({
         />
       </div>
       <div className='token-edit-save'>
-        <Button type='primary' onClick={onUpdate}>
+        <Button type='primary' onClick={onUpdate} shape={'round'}>
           Save Changes
         </Button>
       </div>

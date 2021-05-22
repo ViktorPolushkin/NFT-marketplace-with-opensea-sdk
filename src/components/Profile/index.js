@@ -189,7 +189,7 @@ const Profile = ({
           />
         </div>
         <div className='profile-edit-save'>
-          <Button type='primary' loading={isUploading} onClick={onClickHandler}>
+          <Button type='primary' loading={isUploading} onClick={onClickHandler} shape={'round'}>
             Save Changes
           </Button>
         </div>

@@ -92,6 +92,7 @@ const Collection = ({
               type='primary'
               icon={<PlusCircleOutlined />}
               onClick={showDrawer}
+              shape={'round'}
             >
               Add Collection
             </Button>,
@@ -168,12 +169,13 @@ const Collection = ({
           <div className='collection-creator-buttons'>
             <Button
               // loading={isLoading}
+              shape={'round'}
               type='primary'
               onClick={onCreateCollection}
             >
               Create Collection
             </Button>
-            <Button onClick={() => onClose()}>Cancel</Button>
+            <Button onClick={() => onClose()} shape={'round'}>Cancel</Button>
           </div>
         </div>
       </Drawer>

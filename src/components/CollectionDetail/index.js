@@ -102,6 +102,7 @@ const CollectionDetail = ({
           extra={ [
             <Search key={ 'itemSearch' } style={ { width: 'auto' } } />,
             <Button
+              shape={'round'}
               key={ 'itemAdd' }
               type='primary'
               icon={ <PlusCircleOutlined /> }
@@ -110,6 +111,7 @@ const CollectionDetail = ({
               Add Item
             </Button>,
             <Button
+              shape={'round'}
               key={ 'itemDelete' }
               type='danger'
               icon={ <MinusCircleOutlined /> }
@@ -205,12 +207,13 @@ const CollectionDetail = ({
           <div className='item-creator-buttons'>
             <Button
               // loading={isLoading}
+              shape={'round'}
               type='primary'
               onClick={ onCreateHandler }
             >
               Create Item
             </Button>
-            <Button onClick={ () => onClose() }>Cancel</Button>
+            <Button onClick={ () => onClose() } shape={'round'}>Cancel</Button>
           </div>
         </div>
       </Drawer>

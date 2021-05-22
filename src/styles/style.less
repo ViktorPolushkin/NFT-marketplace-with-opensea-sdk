@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.dark.less';
+@import '~antd/dist/antd.less';
 
 html,
 body {
@@ -7,18 +7,23 @@ body {
   margin: 0;
   padding: 0;
   outline: 0;
-  background-color: #161c24;
+  background-color: #fff;
   overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
   font-family: 'Be Vietnam', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 
   /* Works on Firefox */
   scrollbar-width: thin;
   scrollbar-color: #66bbc6dd transparent;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 
   /* Works on Chrome, Edge, and Safari */
   &::-webkit-scrollbar {
@@ -28,7 +33,7 @@ body {
       background: transparent;
 
       &:hover {
-        background: #262b2f44;
+        background: #ffffff44;
       }
     }
 
@@ -44,6 +49,8 @@ body {
       }
     }
   }
+
+  transition: 0.3s;
 }
 
 #root {
@@ -62,4 +69,12 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 80px 24px;
+}
+
+.image-bottomed {
+  margin-bottom: 3px;
+}
+
+.spanner {
+  flex-grow: 1;
 }

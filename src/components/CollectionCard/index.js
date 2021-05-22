@@ -10,7 +10,7 @@ const CollectionCard = ({ url, name, onClickEdit, onClickCard }) => (
     </div>
     <div className='collection-card-image' onClick={() => onClickCard(name)}>
       {url ? (
-        <img src={url} alt='Collection img' width={'100%'} />
+        <img src={url} alt='Collection img'/>
       ) : (
         <div>
           {/* :D IMAGE :P */}

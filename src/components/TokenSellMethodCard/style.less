@@ -1,0 +1,52 @@
+.token-sell-card-item {
+  position: relative;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 96px;
+  width: 100%;
+  margin: 8px;
+  padding: 8px;
+  border: 1px solid #0008;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+
+  &-disabled {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0008;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px 1px #0008;
+  }
+
+  & > div {
+    text-align: center;
+  }
+
+  &-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.selected-item {
+  border: 1px solid #35375a;
+  box-shadow: 0 0 8px 1px #35375a;
+
+  &:hover {
+    box-shadow: 0 0 16px 1px #35375a;
+  }
+}

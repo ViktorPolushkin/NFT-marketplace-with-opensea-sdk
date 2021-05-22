@@ -94,6 +94,9 @@ const CollectionEdit = ({
         collections: newCollections,
       },
       params: profileData.walletId,
+      onSuccess: getCollectionsAction({
+        params: profileData.walletId
+      })
     })
   }
 

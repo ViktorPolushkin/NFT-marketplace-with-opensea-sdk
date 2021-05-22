@@ -26,10 +26,11 @@ const Dashboard = () => {
         <Carousel autoplay dotPosition={'top'} effect={'fade'}>
           <div className='dashboard-carousel-image-wrap'>
             <div className='dashboard-carousel-image-info'>
-              <span>
-                This is large NFT marketplace. You can find everything in here!
+              <span style={{color: '#fff'}}>
+                <strong>Focus Market</strong> is a platform where photographers can supplement thier income by minting and selling their original photographs on the first all-photography NFT marketplace.
               </span>
               <Button
+                shape={'round'}
                 icon={<SearchOutlined />}
                 type={'primary'}
                 onClick={onClickBrowse}
@@ -45,8 +46,11 @@ const Dashboard = () => {
           </div>
           <div className='dashboard-carousel-image-wrap'>
             <div className='dashboard-carousel-image-info'>
-              <span>Do you want to create your own? Let's do this!</span>
+              <span style={{ color: '#fff'}}>
+                The first NFT marketplace for the global Photography market. Binance Smart Chain and Ethereum Dual Network Support
+              </span>
               <Button
+                shape={'round'}
                 icon={<HighlightOutlined />}
                 type={'primary'}
                 onClick={onClickCreate}

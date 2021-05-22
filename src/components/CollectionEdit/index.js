@@ -63,7 +63,7 @@ const CollectionEdit = ({
       />
       <div className='collection-edit-field'>
         <div className='collection-edit-field-title'>Image URL:</div>
-        <ImgCrop rotate>
+        <ImgCrop rotate grid>
           <Upload
             name='avatar'
             listType='picture-card'
@@ -95,7 +95,7 @@ const CollectionEdit = ({
         />
       </div>
       <div className='collection-edit-save'>
-        <Button type='primary' onClick={onUpdate}>
+        <Button type='primary' onClick={onUpdate} shape={'round'}>
           Save Changes
         </Button>
       </div>
