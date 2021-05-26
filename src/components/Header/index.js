@@ -52,6 +52,7 @@ const Header = ({
         <span>Profile</span>
       </Link>
       <Button
+        size={'large'}
         icon={<LogoutOutlined />}
         onClick={() => logoutHandler()}
         shape={'round'}

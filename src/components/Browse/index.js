@@ -73,7 +73,7 @@ const Browse = ({
             } }
             description={ <span>There are no items to show.</span> }
           >
-            <Button type='primary' onClick={ onEmptyCreate } shape={'round'}>
+            <Button type='primary' onClick={ onEmptyCreate } shape={'round'} size={'large'}>
               Create Now
             </Button>
           </Empty>

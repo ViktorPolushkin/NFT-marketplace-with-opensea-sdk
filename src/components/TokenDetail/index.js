@@ -32,7 +32,7 @@ const offerColumns = [
   {
     title: 'Action',
     key: 'action',
-    render: () => <Button type='primary'>Accept</Button>,
+    render: () => <Button size={'large'} type='primary' shape={'round'}>Accept</Button>,
   },
 ]
 
@@ -97,6 +97,7 @@ const TokenDetail = ({ token, onSellToken }) => {
         extra={[
           !listed && (
             <Button
+              size={'large'}
               key='primary'
               type={'primary'}
               shape={'round'}

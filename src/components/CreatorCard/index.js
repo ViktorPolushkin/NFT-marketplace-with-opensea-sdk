@@ -46,9 +46,9 @@ const CreatorCard = ({
       <div className='creator-card-info-name'>{nickname}</div>
       <div className='creator-card-info-comment'>{comment}</div>
       <div className='creator-card-info-social'>
-        <Button shape={'circle'} icon={<FacebookFilled />}></Button>
-        <Button shape={'circle'} icon={<TwitterCircleFilled />}></Button>
-        <Button shape={'circle'} icon={<WhatsAppOutlined />}></Button>
+        <Button size={'large'} shape={'circle'} icon={<FacebookFilled />}></Button>
+        <Button size={'large'} shape={'circle'} icon={<TwitterCircleFilled />}></Button>
+        <Button size={'large'} shape={'circle'} icon={<WhatsAppOutlined />}></Button>
       </div>
       <div className='creator-card-properties'>
         <FollowerItem header={'Follower'} comment={'46k'} />

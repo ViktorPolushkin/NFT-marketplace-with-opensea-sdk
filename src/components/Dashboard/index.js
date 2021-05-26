@@ -30,6 +30,7 @@ const Dashboard = () => {
                 <strong>Focus Market</strong> is a platform where photographers can supplement thier income by minting and selling their original photographs on the first all-photography NFT marketplace.
               </span>
               <Button
+                size={'large'}
                 shape={'round'}
                 icon={<SearchOutlined />}
                 type={'primary'}
@@ -50,6 +51,7 @@ const Dashboard = () => {
                 The first NFT marketplace for the global Photography market. Binance Smart Chain and Ethereum Dual Network Support
               </span>
               <Button
+                size={'large'}
                 shape={'round'}
                 icon={<HighlightOutlined />}
                 type={'primary'}

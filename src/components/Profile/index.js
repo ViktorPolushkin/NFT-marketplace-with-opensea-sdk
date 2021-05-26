@@ -100,6 +100,7 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Email :</div>
           <Input
+            size={'large'}
             name={'email'}
             addonAfter={'.com'}
             placeholder={'Please fill your email in here'}
@@ -110,6 +111,7 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Nickname :</div>
           <Input
+            size={'large'}
             name={'nickname'}
             addonBefore={'@'}
             placeholder={'Please fill your email in here'}
@@ -119,7 +121,7 @@ const Profile = ({
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Banner Image :</div>
-          <ImgCrop rotate aspect={16 / 9} grid>
+          <ImgCrop rotate aspect={16 / 9} grid quality={1} modalOk={'Crop'}>
             <Upload
               name='avatar'
               listType='picture-card'
@@ -139,7 +141,7 @@ const Profile = ({
         </div>
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Avatar Image :</div>
-          <ImgCrop rotate grid>
+          <ImgCrop rotate grid quality={1} modalOk={'Crop'}>
             <Upload
               name='avatar'
               listType='picture-card'
@@ -171,6 +173,7 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Website :</div>
           <Input
+            size={'large'}
             name={'website'}
             addonBefore={'www.'}
             addonAfter={'.com'}
@@ -182,6 +185,7 @@ const Profile = ({
         <div className='profile-edit-field'>
           <div className='profile-edit-title'>Discord :</div>
           <Input
+            size={'large'}
             name={'discord'}
             placeholder={'Please include #Code'}
             value={discord}
@@ -189,7 +193,7 @@ const Profile = ({
           />
         </div>
         <div className='profile-edit-save'>
-          <Button type='primary' loading={isUploading} onClick={onClickHandler} shape={'round'}>
+          <Button size={'large'} type='primary' loading={isUploading} onClick={onClickHandler} shape={'round'}>
             Save Changes
           </Button>
         </div>

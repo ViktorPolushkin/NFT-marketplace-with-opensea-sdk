@@ -77,7 +77,7 @@ const TokenEdit = ({
       </div>
       <div className='token-edit-field'>
         <div className='token-edit-field-title'>Name:</div>
-        <Input name={'name'} value={name} onChange={e => onChange(e)} />
+        <Input size={'large'} name={'name'} value={name} onChange={e => onChange(e)} />
       </div>
       <div className='token-edit-field'>
         <div className='token-edit-field-title'>Description:</div>
@@ -89,7 +89,7 @@ const TokenEdit = ({
         />
       </div>
       <div className='token-edit-save'>
-        <Button type='primary' onClick={onUpdate} shape={'round'}>
+        <Button size={'large'} type='primary' onClick={onUpdate} shape={'round'}>
           Save Changes
         </Button>
       </div>

@@ -86,8 +86,9 @@ const Collection = ({
           className='collection-page-header-title'
           title={'Collection'}
           extra={[
-            <Search key={'collectionSearch'} style={{ width: 'auto' }} />,
+            <Search size={'large'} className='input-round-all' key={'collectionSearch'} style={{ width: 'auto' }} />,
             <Button
+              size={'large'}
               key={'collectionAdd'}
               type='primary'
               icon={<PlusCircleOutlined />}
@@ -117,7 +118,7 @@ const Collection = ({
         <div className='collection-creator'>
           <div className='collection-creator-info'>
             <div className='collection-creator-info-file-reader'>
-              <ImgCrop rotate grid>
+              <ImgCrop rotate grid quality={1} modalOk={'Crop'}>
                 <Upload
                   name='avatar'
                   listType='picture-card'
@@ -141,6 +142,7 @@ const Collection = ({
             </div>
             <div className='collection-creator-info-name'>
               <Input
+                size={'large'}
                 name={'name'}
                 placeholder='Name of new collection'
                 onChange={e => onChangeHandler(e)}
@@ -156,6 +158,7 @@ const Collection = ({
             </div>
             <div className='collection-creator-info-fee'>
               <InputNumber
+                size={'large'}
                 style={{ width: '100%' }}
                 name={'fee'}
                 min={0}
@@ -169,13 +172,14 @@ const Collection = ({
           <div className='collection-creator-buttons'>
             <Button
               // loading={isLoading}
+              size={'large'}
               shape={'round'}
               type='primary'
               onClick={onCreateCollection}
             >
               Create Collection
             </Button>
-            <Button onClick={() => onClose()} shape={'round'}>Cancel</Button>
+            <Button size={'large'} onClick={() => onClose()} shape={'round'}>Cancel</Button>
           </div>
         </div>
       </Drawer>

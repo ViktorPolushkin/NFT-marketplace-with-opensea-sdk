@@ -11,8 +11,9 @@ import BNBSYMBOL from 'resources/CoinLogo/bnb-dark-256.svg'
 const { Option } = Select
 
 const CoinTypeSelect = () => (
-  <Select defaultValue='BNB' className='select-before' size={'large'}>
-    <Option value='BNB'>
+  <Select className='input-round-left' defaultValue='BNB' size={'large'}>
+    <Option value='BNB' >
+      { `BNB  ` }
       <img
         className='image-bottomed'
         src={BNBSYMBOL}
@@ -62,6 +63,7 @@ const TokenSell = () => {
               <CoinTypeSelect />
               <InputNumber
                 style={{ width: 150, marginLeft: -2 }}
+                className='input-round-right'
                 defaultValue='0'
                 min='0'
                 step='0.00000001'
@@ -78,7 +80,7 @@ const TokenSell = () => {
           </div>
           <div className='token-sell-summary-field'>
             <div className='token-sell-summary-field-title'>Listing</div>
-            <Button type={'primary'} shape={'round'}>
+            <Button size={'large'} type={'primary'} shape={'round'}>
               Post your listing
             </Button>
           </div>

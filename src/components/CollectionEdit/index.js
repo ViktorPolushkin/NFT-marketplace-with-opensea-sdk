@@ -63,7 +63,7 @@ const CollectionEdit = ({
       />
       <div className='collection-edit-field'>
         <div className='collection-edit-field-title'>Image URL:</div>
-        <ImgCrop rotate grid>
+        <ImgCrop rotate grid quality={1} modalOk={'Crop'}>
           <Upload
             name='avatar'
             listType='picture-card'
@@ -83,7 +83,7 @@ const CollectionEdit = ({
       </div>
       <div className='collection-edit-field'>
         <div className='collection-edit-field-title'>Name:</div>
-        <Input name={'name'} value={name} onChange={e => onChange(e)} />
+        <Input size={'large'} name={'name'} value={name} onChange={e => onChange(e)} />
       </div>
       <div className='collection-edit-field'>
         <div className='collection-edit-field-title'>Description:</div>
@@ -95,7 +95,7 @@ const CollectionEdit = ({
         />
       </div>
       <div className='collection-edit-save'>
-        <Button type='primary' onClick={onUpdate} shape={'round'}>
+        <Button size={'large'} type='primary' onClick={onUpdate} shape={'round'}>
           Save Changes
         </Button>
       </div>

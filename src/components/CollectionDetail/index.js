@@ -100,8 +100,9 @@ const CollectionDetail = ({
           className='collection-detail-header-title'
           title={ 'Items' }
           extra={ [
-            <Search key={ 'itemSearch' } style={ { width: 'auto' } } />,
+            <Search size={'large'} key={ 'itemSearch' } style={ { width: 'auto' } } />,
             <Button
+              size={'large'}
               shape={'round'}
               key={ 'itemAdd' }
               type='primary'
@@ -111,6 +112,7 @@ const CollectionDetail = ({
               Add Item
             </Button>,
             <Button
+              size={'large'}
               shape={'round'}
               key={ 'itemDelete' }
               type='danger'
@@ -148,14 +150,15 @@ const CollectionDetail = ({
           setConfirmModalVisible(false)
         } }
         onCancel={ () => setConfirmModalVisible(false) }
-        okButtonProps={ { type: 'danger' } }
+        okButtonProps={{ type: 'danger', shape: 'round', size: 'large' }}
+        cancelButtonProps={{shape:'round', size: 'large'}}
       >
         <p className='collection-detail-deletion-confirm'>
           To confirm deletion, please input
           <span>{ name }</span>
           in below input field
         </p>
-        <Input name='confirm' onChange={ e => onChangeHandler(e) } />
+        <Input size={'large'} name='confirm' onChange={ e => onChangeHandler(e) } />
       </Modal>
       <Drawer
         title='Create a new Item'
@@ -187,6 +190,7 @@ const CollectionDetail = ({
             </div>
             <div className='item-creator-info-name'>
               <Input
+                size={'large'}
                 name={ 'name' }
                 placeholder='Name of new item'
                 onChange={ e => onChangeHandler(e) }
@@ -207,13 +211,14 @@ const CollectionDetail = ({
           <div className='item-creator-buttons'>
             <Button
               // loading={isLoading}
+              size={'large'}
               shape={'round'}
               type='primary'
               onClick={ onCreateHandler }
             >
               Create Item
             </Button>
-            <Button onClick={ () => onClose() } shape={'round'}>Cancel</Button>
+            <Button size={'large'} onClick={ () => onClose() } shape={'round'}>Cancel</Button>
           </div>
         </div>
       </Drawer>

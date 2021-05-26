@@ -78,3 +78,31 @@ body {
 .spanner {
   flex-grow: 1;
 }
+
+.input-round {
+  &-right {
+    border-radius: 0 8px 8px 0;
+    overflow: hidden;
+  }
+
+  &-left {
+    border-radius: 8px 0 0 8px;
+    overflow: hidden;
+
+    & > div {
+      border-radius: 8px 0 0 8px !important;
+    }
+  }
+}
+
+.avatar-uploader {
+  & > div {
+    overflow: hidden;
+    border-radius: 16px !important;
+    max-width: 288px;
+    width: 30% !important;
+    min-width: 144px;
+    height: calc(100%) !important;
+    min-height: 72px;
+  }
+}
