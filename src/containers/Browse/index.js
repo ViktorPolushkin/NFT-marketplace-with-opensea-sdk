@@ -9,7 +9,7 @@ import BrowseComponent from 'components/Browse'
 
 import PATHS from 'constants/Path'
 
-const Browse = ({ token, getTokensAction, ...otherProps }) => {
+const Browse = ({ token, profile, getTokensAction, ...otherProps }) => {
   const rate = 2000 //! Test value
   const history = useHistory()
 
@@ -36,9 +36,9 @@ const Browse = ({ token, getTokensAction, ...otherProps }) => {
     // },
   ]
 
-  const onClickLike = () => { }
+  const onClickLike = () => {}
 
-  const onViewItem = () => { }
+  const onViewItem = () => {}
 
   const onClickCard = (collectionId, id) => {
     history.push(`${PATHS.COLLECTION}/${collectionId}/${id}`)
@@ -54,13 +54,13 @@ const Browse = ({ token, getTokensAction, ...otherProps }) => {
 
   return (
     <BrowseComponent
-      tokens={/*token.content || */ dummyToken }
-      rate={ rate }
-      onViewItem={ onViewItem }
-      onClickLike={ onClickLike }
-      onClickCard={ onClickCard }
-      onEmptyCreate={ onEmptyCreate }
-      onClickEdit={ onClickEdit }
+      tokens={token.content || dummyToken}
+      rate={rate}
+      onViewItem={onViewItem}
+      onClickLike={onClickLike}
+      onClickCard={onClickCard}
+      onEmptyCreate={onEmptyCreate}
+      onClickEdit={onClickEdit}
     />
   )
 }

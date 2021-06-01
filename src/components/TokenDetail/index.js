@@ -32,7 +32,11 @@ const offerColumns = [
   {
     title: 'Action',
     key: 'action',
-    render: () => <Button size={'large'} type='primary' shape={'round'}>Accept</Button>,
+    render: () => (
+      <Button size={'large'} type='primary' shape={'round'}>
+        Accept
+      </Button>
+    ),
   },
 ]
 
@@ -77,6 +81,8 @@ const TokenDetail = ({ token, onSellToken }) => {
     offer,
     meta: { views, likes },
   } = token
+
+  console.log('listed:', listed)
 
   const chartConfigs = {
     type: 'line',

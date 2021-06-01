@@ -35,7 +35,7 @@ const TokenDetail = ({ match, token, getTokenAction }) => {
       description: '',
       creator: '',
       owner: '',
-      listed: false,
+      listed: null,
     },
     offer: [],
     meta: {

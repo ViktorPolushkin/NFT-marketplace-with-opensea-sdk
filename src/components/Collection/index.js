@@ -86,7 +86,12 @@ const Collection = ({
           className='collection-page-header-title'
           title={'Collection'}
           extra={[
-            <Search size={'large'} className='input-round-all' key={'collectionSearch'} style={{ width: 'auto' }} />,
+            <Search
+              size={'large'}
+              className='input-round-all'
+              key={'collectionSearch'}
+              style={{ width: 'auto' }}
+            />,
             <Button
               size={'large'}
               key={'collectionAdd'}
@@ -108,7 +113,7 @@ const Collection = ({
       </SmartWrap>
       <Drawer
         title='Create new collection'
-        width={'100%'}
+        width={400}
         placement={'right'}
         closable={true}
         onClose={onClose}
@@ -179,7 +184,9 @@ const Collection = ({
             >
               Create Collection
             </Button>
-            <Button size={'large'} onClick={() => onClose()} shape={'round'}>Cancel</Button>
+            <Button size={'large'} onClick={() => onClose()} shape={'round'}>
+              Cancel
+            </Button>
           </div>
         </div>
       </Drawer>

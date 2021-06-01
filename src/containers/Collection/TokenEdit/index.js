@@ -63,26 +63,27 @@ const TokenEdit = ({ match, token, getTokenAction, updateTokenAction }) => {
   const onUpdateHandler = () => {
     updateTokenAction({
       body: {
-        detail: {
-          url: imageUrl,
-          name,
-          description,
-        },
+        url: imageUrl,
+        name,
+        description,
+        creator: tokenDetail.creator,
+        owner: tokenDetail.owner,
+        fee: 4,
       },
       params: tokenId,
     })
   }
 
-  console.log(tokenDetail);
+  console.log(tokenDetail)
 
   return (
     <TokenEditComponent
-      name={ name || tokenDetail.name }
-      url={ imageUrl || tokenDetail.url }
-      description={ description || tokenDetail.description }
-      onChange={ onChangeHandler }
-      onUpdate={ onUpdateHandler }
-      customRequest={ customRequest }
+      name={name || tokenDetail.name}
+      url={imageUrl || tokenDetail.url}
+      description={description || tokenDetail.description}
+      onChange={onChangeHandler}
+      onUpdate={onUpdateHandler}
+      customRequest={customRequest}
     />
   )
 }

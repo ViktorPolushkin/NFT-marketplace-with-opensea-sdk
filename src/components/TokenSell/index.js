@@ -12,8 +12,8 @@ const { Option } = Select
 
 const CoinTypeSelect = () => (
   <Select className='input-round-left' defaultValue='BNB' size={'large'}>
-    <Option value='BNB' >
-      { `BNB  ` }
+    <Option value='BNB'>
+      {`BNB  `}
       <img
         className='image-bottomed'
         src={BNBSYMBOL}
@@ -25,7 +25,7 @@ const CoinTypeSelect = () => (
   </Select>
 )
 
-const TokenSell = () => {
+const TokenSell = ({ currentPrise, onPriceChange, onPostListing }) => {
   return (
     <div className='token-sell'>
       <PageHeader
@@ -45,13 +45,13 @@ const TokenSell = () => {
                 title={'Set Price'}
                 content={'Sell at a fixed price'}
                 select={true}
-                onSelect={() => { }}
+                onSelect={() => {}}
               />
               <TokenSellMethodCard
                 title={'Highest Bid'}
                 content={'Auction to the highest bidder'}
                 select={false}
-                onSelect={() => { }}
+                onSelect={() => {}}
                 disabled
               />
             </div>
@@ -64,11 +64,12 @@ const TokenSell = () => {
               <InputNumber
                 style={{ width: 150, marginLeft: -2 }}
                 className='input-round-right'
-                defaultValue='0'
+                defaultValue={currentPrise || 0}
                 min='0'
                 step='0.00000001'
                 stringMode
                 size={'large'}
+                onChange={onPriceChange}
               />
             </div>
           </div>
@@ -80,7 +81,12 @@ const TokenSell = () => {
           </div>
           <div className='token-sell-summary-field'>
             <div className='token-sell-summary-field-title'>Listing</div>
-            <Button size={'large'} type={'primary'} shape={'round'}>
+            <Button
+              size={'large'}
+              type={'primary'}
+              shape={'round'}
+              onClick={onPostListing}
+            >
               Post your listing
             </Button>
           </div>

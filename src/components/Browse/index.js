@@ -21,19 +21,19 @@ const Browse = ({
       <div className='browse-page-header'>
         <PageHeader
           className='browse-page-header-title'
-          title={ 'Browses' }
-          extra={ [
+          title={'Browses'}
+          extra={[
             <Select
-              key={ 'browse-search' }
+              key={'browse-search'}
               showSearch
-              style={ { width: 200 } }
+              style={{ width: 200 }}
               placeholder='Search to Select'
               optionFilterProp='children'
-              defaultValue={ 'recentListed' }
-              filterOption={ (input, option) =>
+              defaultValue={'recentListed'}
+              filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
-              filterSort={ (optionA, optionB) =>
+              filterSort={(optionA, optionB) =>
                 optionA.children
                   .toLowerCase()
                   .localeCompare(optionB.children.toLowerCase())
@@ -48,11 +48,11 @@ const Browse = ({
               <Option value='oldest'>Oldest</Option>
               <Option value='mostViews'>Most Views</Option>
             </Select>,
-          ] }
+          ]}
         />
       </div>
       <div className='browse-assets'>
-        { tokens.length ? (
+        {tokens.length ? (
           <SmartWrap>
             {generateTokenCards(
               tokens,
@@ -60,24 +60,29 @@ const Browse = ({
               onClickEdit,
               onClickCard,
               onViewItem,
-              onClickLike,
-            ) }
+              onClickLike
+            )}
           </SmartWrap>
         ) : (
           <Empty
-            className={ 'browse-empty' }
-            image={ Empty.PRESENTED_IMAGE_SIMPLE }
-            imageStyle={ {
+            className={'browse-empty'}
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            imageStyle={{
               height: 144,
               width: 144,
-            } }
-            description={ <span>There are no items to show.</span> }
+            }}
+            description={<span>There are no items to show.</span>}
           >
-            <Button type='primary' onClick={ onEmptyCreate } shape={'round'} size={'large'}>
+            <Button
+              type='primary'
+              onClick={onEmptyCreate}
+              shape={'round'}
+              size={'large'}
+            >
               Create Now
             </Button>
           </Empty>
-        ) }
+        )}
       </div>
     </div>
   )

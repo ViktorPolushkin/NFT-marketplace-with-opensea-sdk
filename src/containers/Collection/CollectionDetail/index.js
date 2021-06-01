@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { collectionStateSelector, profileStateSelector, tokenStateSelector } from 'redux/selectors'
+import {
+  collectionStateSelector,
+  profileStateSelector,
+  tokenStateSelector,
+} from 'redux/selectors'
 import {
   getCollectionsAction,
   updateCollectionsAction,
 } from 'redux/Reducers/Collection'
 import {
   createTokenAction,
-  getTokensActionByCollectionId
+  getTokensActionByCollectionId,
 } from 'redux/Reducers/Token'
 import { useHistory } from 'react-router-dom'
 
@@ -27,7 +31,7 @@ const CollectionDetail = ({
   getCollectionsAction,
   updateCollectionsAction,
   createTokenAction,
-  getTokensActionByCollectionId
+  getTokensActionByCollectionId,
 }) => {
   const history = useHistory()
 
@@ -57,8 +61,8 @@ const CollectionDetail = ({
     if (currentCollection) {
       getTokensActionByCollectionId({
         body: {
-          collectionId: currentCollection.name
-        }
+          collectionId: currentCollection.name,
+        },
       })
     }
   }, [getTokensActionByCollectionId, currentCollection])
@@ -109,12 +113,12 @@ const CollectionDetail = ({
   // ! Super important:
   // TODO: Add smart contract
   const onCreateHandler = () => {
-    console.log(imageUrl, name, description);
+    console.log(imageUrl, name, description)
     createTokenAction({
       body: {
         collectionId: currentCollection.name,
-        id: dummyToken.id,
-        address: dummyToken.address,
+        id: currentCollection._id,
+        address: currentCollection.url,
         type: dummyToken.type,
         detail: {
           url: imageUrl,
@@ -124,7 +128,7 @@ const CollectionDetail = ({
         },
         createdDate: Date.now(),
         fee: APP_FEE,
-      }
+      },
     })
   }
 
@@ -161,18 +165,18 @@ const CollectionDetail = ({
 
   return (
     <CollectionDetailComponent
-      bannerUrl={ currentCollection.url }
-      name={ currentCollection.name }
-      description={ currentCollection.description }
-      tokens={ token.content }
-      rate={ 2000 }
-      onChangeHandler={ onChangeHandler }
-      onCreateHandler={ onCreateHandler }
-      onDeleteHandler={ onDeleteHandler }
-      imageUrl={ imageUrl }
-      customRequest={ customRequest }
-      onClickEdit={ onClickEdit }
-      onClickCard={ onClickCard }
+      bannerUrl={currentCollection.url}
+      name={currentCollection.name}
+      description={currentCollection.description}
+      tokens={token.content}
+      rate={2000}
+      onChangeHandler={onChangeHandler}
+      onCreateHandler={onCreateHandler}
+      onDeleteHandler={onDeleteHandler}
+      imageUrl={imageUrl}
+      customRequest={customRequest}
+      onClickEdit={onClickEdit}
+      onClickCard={onClickCard}
     />
   )
 }
@@ -180,14 +184,14 @@ const CollectionDetail = ({
 const mapStateToProps = createStructuredSelector({
   collection: collectionStateSelector,
   profile: profileStateSelector,
-  token: tokenStateSelector
+  token: tokenStateSelector,
 })
 
 const mapDispatchToProps = {
   getCollectionsAction,
   updateCollectionsAction,
   createTokenAction,
-  getTokensActionByCollectionId
+  getTokensActionByCollectionId,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionDetail)

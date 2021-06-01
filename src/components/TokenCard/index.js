@@ -26,45 +26,45 @@ const TokenCard = ({
   <div className='token-card'>
     <div
       className='token-card-edit'
-      onClick={ () => onClickEdit(collectionId, id) }
+      onClick={() => onClickEdit(collectionId, id)}
     >
       <EditFilled />
     </div>
     <div
       className='token-card-image'
-      onClick={ () => {
+      onClick={() => {
         onViewItem()
         onClickCard(collectionId, id)
-      } }
+      }}
     >
-      { url ? (
-        <img src={ url } alt='Collection img' height={ '100%' } />
+      {url ? (
+        <img src={url} alt='Collection img' height={'100%'} />
       ) : (
         <div>
           <LoadingOutlined />
         </div>
-      ) }
+      )}
     </div>
     <div
       className='token-card-info'
-      onClick={ () => {
+      onClick={() => {
         onViewItem()
         onClickCard(collectionId, id)
-      } }
+      }}
     >
       <div className='token-card-info-collection'>
-        <div className='token-card-info-title'>{ name }</div>
-        <div className='token-card-info-value'>{ `${prise} BNB ≈ ${Number(
+        <div className='token-card-info-title'>{name}</div>
+        <div className='token-card-info-value'>{`${prise} BNB ≈ ${Number(
           rate * prise
-        ).toFixed(2)} USD` }</div>
+        ).toFixed(2)} USD`}</div>
       </div>
       <div className='token-card-info-likes-views'>
-        <div className='token-card-info-likes' onClick={ onClickLike }>
-          { likes }
+        <div className='token-card-info-likes' onClick={onClickLike}>
+          {likes}
           <LikeOutlined />
         </div>
         <div className='token-card-info-views'>
-          { views }
+          {views}
           <EyeOutlined />
         </div>
       </div>
