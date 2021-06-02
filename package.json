@@ -7,7 +7,7 @@
     "@openzeppelin/contracts": "^4.1.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^13.1.8",
+    "@testing-library/user-event": "^13.1.9",
     "antd": "^4.15.4",
     "antd-img-crop": "^3.14.1",
     "axios": "^0.21.1",
